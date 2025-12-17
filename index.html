@@ -16,9 +16,10 @@
 
         body {
             font-family: 'Tajawal', sans-serif;
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #1a252f 100%);
+            background: linear-gradient(135deg, #5280ad 0%, #103456 50%, #001c36 100%);
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 20px;
@@ -62,11 +63,11 @@
         }
 
         .description {
-            font-size: 1.4em;
-            color: #7f8c8d;
+            font-size: 1.6em;
+            color: #1d5054;
             margin-bottom: 45px;
             line-height: 1.8;
-            font-weight: 400;
+            font-weight: ;
         }
 
         .coffee-section {
@@ -83,7 +84,7 @@
 
         .coffee-link {
             display: inline-block;
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            background: linear-gradient(135deg, #e74c3c 0%, #e63d2a 100%);
             color: white;
             text-decoration: none;
             padding: 16px 40px;
@@ -102,6 +103,45 @@
 
         .coffee-link:active {
             transform: translateY(-1px);
+        }
+
+        .social-section {
+            margin-top: 40px;
+            text-align: center;
+            animation: fadeIn 0.6s ease-out 0.4s both;
+        }
+
+        .social-title {
+            font-size: 1.2em;
+            color: #ffffff;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: inline-block;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 500;
+            padding: 10px 20px;
+            border: 2px solid #ffffff;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: #ffffff;
+            color: #103456;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
         }
 
         @media (max-width: 768px) {
@@ -125,6 +165,11 @@
                 font-size: 1.1em;
                 padding: 14px 35px;
             }
+
+            .social-link {
+                font-size: 1em;
+                padding: 8px 16px;
+            }
         }
     </style>
 </head>
@@ -136,6 +181,14 @@
         <div class="coffee-section">
             <div class="coffee-text">لكن ادخل سوي قهوتك هنا:</div>
             <a href="https://coffee.iahmadh.com" class="coffee-link" target="_blank">coffee.iahmadh.com</a>
+        </div>
+    </div>
+    <div class="social-section">
+        <div class="social-title">وسائل التواصل:</div>
+        <div class="social-links">
+            <a href="https://t.me/iAhmadH" class="social-link" target="_blank">تليجرام</a>
+            <a href="https://www.snapchat.com/@iahmad_soliman" class="social-link" target="_blank">سناب</a>
+            <a href="mailto:Contact@iahmadh.com" class="social-link">إيميل</a>
         </div>
     </div>
 </body>
