@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مرحباً - Ahmad Soliman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #1a252f 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            direction: rtl;
+        }
+
+        .container {
+            text-align: center;
+            background: #ffffff;
+            padding: 70px 60px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 700px;
+            width: 100%;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 3.5em;
+            color: #1e3a5f;
+            margin-bottom: 35px;
+            font-weight: 700;
+        }
+
+        .name {
+            font-size: 2em;
+            color: #4a90a4;
+            margin-bottom: 35px;
+            font-weight: 600;
+        }
+
+        .description {
+            font-size: 1.4em;
+            color: #7f8c8d;
+            margin-bottom: 45px;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        .coffee-section {
+            margin-top: 35px;
+            animation: fadeIn 0.6s ease-out 0.2s both;
+        }
+
+        .coffee-text {
+            font-size: 1.3em;
+            color: #34495e;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .coffee-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            text-decoration: none;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-size: 1.3em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .coffee-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+            background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+        }
+
+        .coffee-link:active {
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .name {
+                font-size: 1.6em;
+            }
+            
+            .description {
+                font-size: 1.2em;
+            }
+            
+            .container {
+                padding: 50px 35px;
+            }
+
+            .coffee-link {
+                font-size: 1.1em;
+                padding: 14px 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>يالله حيّهم..</h1>
+        <div class="name">أنا أحمد سُليمان</div>
+        <div class="description">والله مدري وش أحط بهالصفحة </div>
+        <div class="coffee-section">
+            <div class="coffee-text">لكن ادخل سوي قهوتك هنا:</div>
+            <a href="https://coffee.iahmadh.com" class="coffee-link" target="_blank">coffee.iahmadh.com</a>
+        </div>
+    </div>
+</body>
+</html>
