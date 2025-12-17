@@ -33,64 +33,90 @@
             position: fixed;
             width: 45px;
             height: 45px;
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            border-radius: 50%;
             z-index: 2;
-            transition: left 0.1s linear, top 0.1s linear;
-            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.6);
+            transition: left 0.3s ease-out, top 0.3s ease-out;
             pointer-events: none;
             top: 50%;
             left: 50%;
-            border: 2px solid #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            line-height: 1;
+            transform: translate(0, 0);
         }
 
         .game-character::before {
-            content: '🧑';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 30px;
+            content: '👳🏻‍♂️';
+        }
+
+        .game-character.collision {
+            animation: collisionShake 0.5s ease;
+        }
+
+        .game-car.collision {
+            animation: collisionShake 0.5s ease;
+        }
+
+        @keyframes collisionShake {
+            0%, 100% { 
+                transform: translate(0, 0) rotate(0deg);
+            }
+            10% { 
+                transform: translate(-15px, -15px) rotate(-8deg) scale(1.1);
+            }
+            20% { 
+                transform: translate(15px, 15px) rotate(8deg) scale(1.1);
+            }
+            30% { 
+                transform: translate(-15px, 15px) rotate(-8deg) scale(1.1);
+            }
+            40% { 
+                transform: translate(15px, -15px) rotate(8deg) scale(1.1);
+            }
+            50% { 
+                transform: translate(-10px, -10px) rotate(-5deg) scale(1.05);
+            }
+            60% { 
+                transform: translate(10px, 10px) rotate(5deg) scale(1.05);
+            }
+            70% { 
+                transform: translate(-5px, 5px) rotate(-3deg);
+            }
+            80% { 
+                transform: translate(5px, -5px) rotate(3deg);
+            }
+            90% { 
+                transform: translate(-3px, -3px) rotate(-1deg);
+            }
         }
 
         .game-car {
             position: fixed;
             width: 90px;
             height: 55px;
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-            border-radius: 10px;
             z-index: 1;
             transition: left 0.05s linear, top 0.05s linear;
-            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.7);
             pointer-events: none;
             top: 20%;
             left: 20%;
-            border: 2px solid #ffffff;
-        }
-
-        .game-car::before {
-            content: '';
-            position: absolute;
-            width: 70px;
-            height: 40px;
-            background: rgba(192, 57, 43, 0.5);
-            border-radius: 8px;
-            top: 5px;
-            left: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            line-height: 1;
+            transform: translate(0, 0);
         }
 
         .game-car::after {
             content: '🚗';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 35px;
         }
 
         .container {
             text-align: center;
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 70px 60px;
             border-radius: 20px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
@@ -99,6 +125,7 @@
             animation: fadeIn 0.6s ease-out;
             position: relative;
             z-index: 10;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         @keyframes fadeIn {
@@ -291,7 +318,8 @@
         
         const characterSize = 45;
         const carSize = 90;
-        const carSpeed = 2.5; // سرعة السيارة
+        const carSpeed = 2.9; // سرعة السيارة
+        let collisionCooldown = false; // لمنع التصادم المتكرر
         
         // تحديث موضع الشخص بناءً على الماوس
         function updateCharacter() {
@@ -340,15 +368,29 @@
             );
             
             // إذا كانت المسافة أقل من 50 بكسل، يعتبر تصادم
-            if (distance < 50) {
-                // إعادة تعيين المواضع
-                mouseX = window.innerWidth / 2;
-                mouseY = window.innerHeight / 2;
-                carX = window.innerWidth * 0.2;
-                carY = window.innerHeight * 0.2;
+            if (distance < 50 && !collisionCooldown) {
+                // إضافة تأثير التصادم
+                character.classList.add('collision');
+                car.classList.add('collision');
+                collisionCooldown = true;
                 
-                updateCharacter();
-                updateCar();
+                // إزالة التأثير بعد انتهاء animation
+                setTimeout(() => {
+                    character.classList.remove('collision');
+                    car.classList.remove('collision');
+                }, 500);
+                
+                // إعادة تعيين المواضع بعد التأثير
+                setTimeout(() => {
+                    mouseX = window.innerWidth / 2;
+                    mouseY = window.innerHeight / 2;
+                    carX = window.innerWidth * 0.2;
+                    carY = window.innerHeight * 0.2;
+                    
+                    updateCharacter();
+                    updateCar();
+                    collisionCooldown = false;
+                }, 600);
             }
         }
         
