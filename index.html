@@ -28,34 +28,63 @@
             overflow-x: hidden;
         }
 
-        .clickable-ball {
+        .game-character {
             position: fixed;
-            width: 60px;
-            height: 60px;
-            background: radial-gradient(circle, #4ecdc4 0%, #44a08d 100%);
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
             border-radius: 50%;
-            cursor: pointer;
-            z-index: 1;
-            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
-            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.5);
-            pointer-events: auto;
+            z-index: 2;
+            transition: left 0.1s linear, top 0.1s linear;
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.6);
+            pointer-events: none;
+            top: 50%;
+            left: 50%;
+            border: 2px solid #ffffff;
+        }
+
+        .game-character::before {
+            content: '🧑';
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            font-size: 30px;
         }
 
-        .clickable-ball:hover {
-            transform: translate(-50%, -50%) scale(1.1);
+        .game-car {
+            position: fixed;
+            width: 90px;
+            height: 55px;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            border-radius: 10px;
+            z-index: 1;
+            transition: left 0.05s linear, top 0.05s linear;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.7);
+            pointer-events: none;
+            top: 20%;
+            left: 20%;
+            border: 2px solid #ffffff;
         }
 
-        .clickable-ball.active {
-            animation: pulse 0.5s ease;
+        .game-car::before {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 40px;
+            background: rgba(192, 57, 43, 0.5);
+            border-radius: 8px;
+            top: 5px;
+            left: 10px;
         }
 
-        @keyframes pulse {
-            0% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(1.2); }
-            100% { transform: translate(-50%, -50%) scale(1); }
+        .game-car::after {
+            content: '🚗';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 35px;
         }
 
         .container {
@@ -231,58 +260,117 @@
             <a href="mailto:Contact@iahmadh.com" class="social-link">إيميل</a>
         </div>
     </div>
-    <div class="clickable-ball" id="clickableBall"></div>
+    <div class="game-character" id="character"></div>
+    <div class="game-car" id="car"></div>
     <script>
-        const ball = document.getElementById('clickableBall');
-        let size = 60; // الحجم الأولي
-        const maxSize = Math.max(window.innerWidth, window.innerHeight) * 1.5; // الحجم الأقصى ليملأ الصفحة
-
-        function getRandomPosition() {
-            const maxX = window.innerWidth - size;
-            const maxY = window.innerHeight - size;
-            const x = Math.random() * maxX;
-            const y = Math.random() * maxY;
-            return { x, y };
+        const character = document.getElementById('character');
+        const car = document.getElementById('car');
+        
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let carX = window.innerWidth * 0.2;
+        let carY = window.innerHeight * 0.2;
+        
+        const characterSize = 45;
+        const carSize = 90;
+        const carSpeed = 2.5; // سرعة السيارة
+        
+        // تحديث موضع الشخص بناءً على الماوس
+        function updateCharacter() {
+            const maxX = window.innerWidth - characterSize;
+            const maxY = window.innerHeight - characterSize;
+            
+            mouseX = Math.max(characterSize / 2, Math.min(mouseX, maxX - characterSize / 2));
+            mouseY = Math.max(characterSize / 2, Math.min(mouseY, maxY - characterSize / 2));
+            
+            character.style.left = (mouseX - characterSize / 2) + 'px';
+            character.style.top = (mouseY - characterSize / 2) + 'px';
         }
-
-        function moveBall() {
-            const position = getRandomPosition();
-            ball.style.left = position.x + 'px';
-            ball.style.top = position.y + 'px';
-            ball.style.transform = 'translate(0, 0)';
-        }
-
-        ball.addEventListener('click', function(e) {
-            e.stopPropagation();
+        
+        // جعل السيارة تلحق بالشخص
+        function updateCar() {
+            const charCenterX = mouseX;
+            const charCenterY = mouseY;
             
-            // زيادة الحجم
-            size = Math.min(size * 1.3, maxSize);
-            ball.style.width = size + 'px';
-            ball.style.height = size + 'px';
+            // حساب الاتجاه نحو الشخص
+            const dx = charCenterX - carX;
+            const dy = charCenterY - carY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
             
-            // إضافة تأثير النبض
-            ball.classList.add('active');
-            setTimeout(() => {
-                ball.classList.remove('active');
-            }, 500);
-            
-            // تحريك الكرة لمكان جديد
-            moveBall();
-            
-            // إذا وصل الحجم الأقصى، إعادة تعيين
-            if (size >= maxSize * 0.9) {
-                setTimeout(() => {
-                    size = 60;
-                    ball.style.width = size + 'px';
-                    ball.style.height = size + 'px';
-                    moveBall();
-                }, 1000);
+            if (distance > 5) {
+                // تحريك السيارة نحو الشخص
+                carX += (dx / distance) * carSpeed;
+                carY += (dy / distance) * carSpeed;
             }
-        });
-
-        // وضع الكرة في مكان عشوائي عند بدء التحميل
+            
+            // التأكد من أن السيارة داخل الشاشة
+            carX = Math.max(carSize / 2, Math.min(carX, window.innerWidth - carSize / 2));
+            carY = Math.max(carSize / 2, Math.min(carY, window.innerHeight - carSize / 2));
+            
+            car.style.left = (carX - carSize / 2) + 'px';
+            car.style.top = (carY - carSize / 2) + 'px';
+        }
+        
+        // التحقق من التصادم
+        function checkCollision() {
+            const charCenterX = mouseX;
+            const charCenterY = mouseY;
+            
+            const distance = Math.sqrt(
+                Math.pow(charCenterX - carX, 2) + 
+                Math.pow(charCenterY - carY, 2)
+            );
+            
+            // إذا كانت المسافة أقل من 50 بكسل، يعتبر تصادم
+            if (distance < 50) {
+                // إعادة تعيين المواضع
+                mouseX = window.innerWidth / 2;
+                mouseY = window.innerHeight / 2;
+                carX = window.innerWidth * 0.2;
+                carY = window.innerHeight * 0.2;
+                
+                updateCharacter();
+                updateCar();
+            }
+        }
+        
+        // تحديث الماوس/الإصبع
+        function handleMove(e) {
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            
+            mouseX = clientX;
+            mouseY = clientY;
+            
+            updateCharacter();
+        }
+        
+        // الاستماع لحركة الماوس
+        document.addEventListener('mousemove', handleMove);
+        document.addEventListener('touchmove', handleMove, { passive: true });
+        
+        // حلقة اللعبة
+        function gameLoop() {
+            updateCar();
+            checkCollision();
+            requestAnimationFrame(gameLoop);
+        }
+        
+        // بدء اللعبة
         window.addEventListener('load', function() {
-            moveBall();
+            updateCharacter();
+            updateCar();
+            gameLoop();
+        });
+        
+        // تحديث عند تغيير حجم النافذة
+        window.addEventListener('resize', function() {
+            mouseX = Math.min(mouseX, window.innerWidth - characterSize);
+            mouseY = Math.min(mouseY, window.innerHeight - characterSize);
+            carX = Math.min(carX, window.innerWidth - carSize);
+            carY = Math.min(carY, window.innerHeight - carSize);
+            updateCharacter();
+            updateCar();
         });
     </script>
 </body>
