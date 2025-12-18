@@ -95,8 +95,11 @@
             white-space: nowrap;
             opacity: 0;
             text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
-            animation: textRise 15s ease-in infinite;
             padding: 40px 30px;
+        }
+
+        .coffee-fill.active ~ .coffee-text-effect {
+            animation: textRise 15s ease-in forwards;
         }
 
         @keyframes textRise {
@@ -124,10 +127,15 @@
             height: 0%;
             background: linear-gradient(to top, #3e2723 0%, #5d4037 20%, #6d4c41 50%, #8d6e63 80%, #a1887f 100%);
             z-index: 1;
-            animation: pourLiquid 15s ease-in infinite;
             pointer-events: none;
-            opacity: 0.85;
+            opacity: 0;
             overflow: hidden;
+            transition: opacity 0.3s ease;
+        }
+
+        .coffee-fill.active {
+            opacity: 0.85;
+            animation: pourLiquid 15s ease-in forwards;
         }
 
         .coffee-fill::before {
@@ -382,6 +390,21 @@
             font-weight: 500;
         }
 
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 6px 25px rgba(231, 76, 60, 0.5);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            }
+        }
+
         .coffee-link {
             display: inline-block;
             background: linear-gradient(135deg, #e74c3c 0%, #e63d2a 100%);
@@ -393,16 +416,45 @@
             font-weight: 600;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            animation: pulse 2s ease-in-out infinite;
         }
 
         .coffee-link:hover {
-            transform: translateY(-3px);
+            animation-play-state: paused;
+            transform: translateY(-3px) scale(1.05);
             box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
             background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
         }
 
         .coffee-link:active {
             transform: translateY(-1px);
+        }
+
+        .coffee-fill-btn {
+            display: block;
+            width: fit-content;
+            margin: 25px auto 0;
+            background: linear-gradient(135deg, #8d6e63 0%, #6d4c41 100%);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            font-family: 'Tajawal', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(109, 76, 65, 0.3);
+        }
+
+        .coffee-fill-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(109, 76, 65, 0.4);
+            background: linear-gradient(135deg, #6d4c41 0%, #5d4037 100%);
+        }
+
+        .coffee-fill-btn:active {
+            transform: translateY(0);
         }
 
         .game-note {
@@ -616,7 +668,7 @@
             }
             
             h1 {
-                font-size: 2.5em;
+                font-size: 2em;
             }
             
             .name {
@@ -635,6 +687,12 @@
             .coffee-link {
                 font-size: 1.1em;
                 padding: 14px 35px;
+            }
+
+            .coffee-fill-btn {
+                font-size: 1em;
+                padding: 12px 30px;
+                margin-top: 18px;
             }
 
             .profile-image {
@@ -744,7 +802,7 @@
 </head>
 <body>
     <div class="coffee-fill"></div>
-    <div class="coffee-text-effect">ترا كأني أعبي الصفحة قهوة، شرايك بالله؟</div>
+    <div class="coffee-text-effect">جالس أعبي الصفحة قهوة</div>
     <div class="container">
         <img src="profile.jpg" alt="Ahmad Soliman" class="profile-image">
         <h1>يالله حيّهم..</h1>
@@ -753,6 +811,7 @@
         <div class="coffee-section">
             <div class="coffee-text">لكن ادخل سوي قهوتك هنا:</div>
             <a href="https://coffee.iahmadh.com" class="coffee-link" target="_blank">coffee.iahmadh.com</a>
+            <button class="coffee-fill-btn" id="coffeeFillBtn">أو تقهو هنا</button>
             <div class="game-note">  </div>
             <div class="game-note">  </div>
             <div class="game-note">  </div>
@@ -1174,6 +1233,16 @@
         window.addEventListener('load', () => {
             setTimeout(startFloatingMessages, 1000);
         });
+
+        // زر أو تقهو هنا - تفعيل تأثير التعبئة
+        const coffeeFillBtn = document.getElementById('coffeeFillBtn');
+        const coffeeFill = document.querySelector('.coffee-fill');
+        
+        if (coffeeFillBtn && coffeeFill) {
+            coffeeFillBtn.addEventListener('click', () => {
+                coffeeFill.classList.add('active');
+            });
+        }
 
     </script>
     <div class="social-section">
