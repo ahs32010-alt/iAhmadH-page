@@ -248,7 +248,7 @@
 
         .container {
             text-align: center;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             padding: 70px 60px;
@@ -336,6 +336,7 @@
             margin-top: 20px;
             font-weight: 400;
             font-style: italic;
+            display: none; /* مخفي حتى اشعار آخر */
         }
 
         .game-button {
@@ -365,15 +366,16 @@
         }
 
         .game-buttons {
-            display: flex;
+            display: none !important; /* مخفي حتى اشعار آخر */
             gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
             margin-top: 15px;
         }
 
+        /* الألعاب مخفية حتى اشعار آخر */
         .game-modal {
-            display: none;
+            display: none !important; /* مخفي حتى اشعار آخر */
             position: fixed;
             top: 0;
             left: 0;
@@ -386,7 +388,7 @@
         }
 
         .game-modal.active {
-            display: flex;
+            display: none !important; /* مخفي حتى اشعار آخر */
         }
 
         .game-modal-content {
