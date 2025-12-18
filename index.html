@@ -42,7 +42,7 @@
             white-space: nowrap;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(5px);
-            animation: floatMessage 3s ease-in-out forwards;
+            animation: floatMessage 4s ease-in-out forwards;
             opacity: 0;
         }
 
@@ -1082,12 +1082,12 @@
             messageElement.style.left = x + 'px';
             messageElement.style.top = y + 'px';
             
-            // إزالة العنصر بعد انتهاء animation (3 ثوان)
+            // إزالة العنصر بعد انتهاء animation (4 ثوان)
             setTimeout(() => {
                 if (messageElement.parentNode) {
                     messageElement.parentNode.removeChild(messageElement);
                 }
-            }, 3000);
+            }, 4000);
         }
         
         // عرض جملة بشكل متتالي
