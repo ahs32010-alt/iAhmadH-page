@@ -370,10 +370,10 @@
             left: 50%;
             transform: translateX(-50%);
             text-align: center;
-            animation: fadeIn 0.6s ease-out 0.4s both;
-            z-index: 10;
+            z-index: 10000;
             width: 100%;
             direction: rtl;
+            opacity: 1 !important;
         }
 
         .social-title {
@@ -381,6 +381,7 @@
             color: #ffffff;
             margin-bottom: 15px;
             font-weight: 500;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
         }
 
         .social-links {
@@ -388,6 +389,7 @@
             justify-content: center;
             gap: 12px;
             flex-wrap: wrap;
+            direction: rtl;
         }
 
         .social-link {
@@ -400,6 +402,7 @@
             border: 1.5px solid #ffffff;
             border-radius: 6px;
             transition: all 0.3s ease;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
         }
 
         .social-link:hover {
@@ -641,9 +644,9 @@
     <div class="social-section">
         <div class="social-title">وسائل التواصل:</div>
         <div class="social-links">
-            <a href="https://t.me/iAhmadH" class="social-link" target="_blank">تليجرام</a>
-            <a href="https://www.snapchat.com/@iahmad_soliman" class="social-link" target="_blank">سناب</a>
             <a href="mailto:Contact@iahmadh.com" class="social-link">إيميل</a>
+            <a href="https://www.snapchat.com/@iahmad_soliman" class="social-link" target="_blank">سناب</a>
+            <a href="https://t.me/iAhmadH" class="social-link" target="_blank">تليجرام</a>
         </div>
     </div>
 </body>
