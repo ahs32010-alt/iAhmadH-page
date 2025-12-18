@@ -29,6 +29,133 @@
             overflow-x: hidden;
         }
 
+        .coffee-pour-container {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .coffee-cup {
+            font-size: 60px;
+            animation: pourCoffee 8s infinite;
+            transform-origin: center top;
+        }
+
+        @keyframes pourCoffee {
+            0%, 10% {
+                transform: rotate(0deg);
+            }
+            12% {
+                transform: rotate(15deg);
+            }
+            14% {
+                transform: rotate(0deg);
+            }
+            16% {
+                transform: rotate(15deg);
+            }
+            18% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        .coffee-fill {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: linear-gradient(to top, #3e2723 0%, #5d4037 20%, #6d4c41 50%, #8d6e63 80%, #a1887f 100%);
+            z-index: 1;
+            animation: pourLiquid 15s ease-in infinite;
+            pointer-events: none;
+            opacity: 0.85;
+            overflow: hidden;
+        }
+
+        .coffee-fill::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: -50%;
+            width: 200%;
+            height: 80px;
+            background: linear-gradient(to top, #3e2723 0%, #5d4037 50%, #6d4c41 100%);
+            border-radius: 50%;
+            animation: waveAnimation1 2.5s ease-in-out infinite;
+        }
+
+        .coffee-fill::after {
+            content: '';
+            position: absolute;
+            top: -35px;
+            left: -40%;
+            width: 180%;
+            height: 70px;
+            background: linear-gradient(to top, rgba(62, 39, 35, 0.7) 0%, rgba(93, 64, 55, 0.5) 100%);
+            border-radius: 50%;
+            animation: waveAnimation2 3s ease-in-out infinite;
+        }
+
+        @keyframes pourLiquid {
+            0% {
+                height: 0%;
+                bottom: 0;
+            }
+            50% {
+                height: 50%;
+                bottom: 0;
+            }
+            90% {
+                height: 95%;
+                bottom: 0;
+            }
+            100% {
+                height: 100%;
+                bottom: 0;
+            }
+        }
+
+        @keyframes waveAnimation1 {
+            0%, 100% {
+                transform: translateX(0) translateY(0);
+                border-radius: 50% 50% 60% 60% / 0% 0% 40% 40%;
+            }
+            25% {
+                transform: translateX(15px) translateY(10px);
+                border-radius: 55% 45% 65% 55% / 0% 0% 45% 35%;
+            }
+            50% {
+                transform: translateX(-15px) translateY(8px);
+                border-radius: 45% 55% 55% 65% / 0% 0% 35% 45%;
+            }
+            75% {
+                transform: translateX(8px) translateY(12px);
+                border-radius: 50% 50% 60% 60% / 0% 0% 40% 40%;
+            }
+        }
+
+        @keyframes waveAnimation2 {
+            0%, 100% {
+                transform: translateX(0) translateY(0);
+                border-radius: 50% 50% 55% 55% / 0% 0% 35% 35%;
+            }
+            33% {
+                transform: translateX(-12px) translateY(8px);
+                border-radius: 48% 52% 58% 52% / 0% 0% 38% 32%;
+            }
+            66% {
+                transform: translateX(12px) translateY(10px);
+                border-radius: 52% 48% 52% 58% / 0% 0% 32% 38%;
+            }
+        }
+
         .game-character {
             position: fixed;
             width: 45px;
@@ -38,12 +165,16 @@
             pointer-events: none;
             top: 50%;
             left: 50%;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             font-size: 40px;
             line-height: 1;
             transform: translate(0, 0);
+        }
+
+        .game-character.active {
+            display: flex;
         }
 
         .game-character::before {
@@ -100,12 +231,16 @@
             pointer-events: none;
             top: 20%;
             left: 20%;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             font-size: 50px;
             line-height: 1;
             transform: translate(0, 0);
+        }
+
+        .game-car.active {
+            display: flex;
         }
 
         .game-car::after {
@@ -198,10 +333,36 @@
 
         .game-note {
             font-size: 1em;
-            color: #7f8c8d;
+            color: #f5f6ff;
             margin-top: 20px;
             font-weight: 400;
             font-style: italic;
+        }
+
+        .game-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #4a90a4 0%, #3498db 100%);
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(74, 144, 164, 0.3);
+            cursor: pointer;
+            border: none;
+            margin-top: 15px;
+        }
+
+        .game-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 144, 164, 0.4);
+            background: linear-gradient(135deg, #3498db 0%, #4a90a4 100%);
+        }
+
+        .game-button:active {
+            transform: translateY(0);
         }
 
         .social-section {
@@ -283,10 +444,19 @@
             .game-note {
                 font-size: 0.9em;
             }
+
+            .game-button {
+                font-size: 1em;
+                padding: 10px 25px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="coffee-fill"></div>
+    <div class="coffee-pour-container">
+        <div class="coffee-cup">☕</div>
+    </div>
     <div class="container">
         <h1>يالله حيّهم..</h1>
         <div class="name">أنا أحمد سُليمان</div>
@@ -294,7 +464,8 @@
         <div class="coffee-section">
             <div class="coffee-text">لكن ادخل سوي قهوتك هنا:</div>
             <a href="https://coffee.iahmadh.com" class="coffee-link" target="_blank">coffee.iahmadh.com</a>
-            <div class="game-note">حطيت لعبة عشان تتسلى لو طفشان</div>
+            <div class="game-note">حطيت لك ألعاب عشان تتسلى لو طفشان</div>
+            <button class="game-button" id="startGameBtn">سيارة تلحقك</button>
         </div>
     </div>
     <div class="social-section">
@@ -396,6 +567,8 @@
         
         // تحديث الماوس/الإصبع
         function handleMove(e) {
+            if (!gameRunning) return;
+            
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
             const clientY = e.touches ? e.touches[0].clientY : e.clientY;
             
@@ -410,17 +583,51 @@
         document.addEventListener('touchmove', handleMove, { passive: true });
         
         // حلقة اللعبة
+        let gameRunning = false;
         function gameLoop() {
-            updateCar();
-            checkCollision();
-            requestAnimationFrame(gameLoop);
+            if (gameRunning) {
+                updateCar();
+                checkCollision();
+                requestAnimationFrame(gameLoop);
+            }
         }
         
-        // بدء اللعبة
+        // وظيفة بدء/إيقاف اللعبة
+        function toggleGame() {
+            const startBtn = document.getElementById('startGameBtn');
+            
+            if (!gameRunning) {
+                // بدء اللعبة
+                gameRunning = true;
+                character.classList.add('active');
+                car.classList.add('active');
+                updateCharacter();
+                updateCar();
+                gameLoop();
+                
+                // تغيير نص الزر
+                if (startBtn) {
+                    startBtn.textContent = 'إيقاف اللعبة';
+                }
+            } else {
+                // إيقاف اللعبة
+                gameRunning = false;
+                character.classList.remove('active');
+                car.classList.remove('active');
+                
+                // تغيير نص الزر
+                if (startBtn) {
+                    startBtn.textContent = 'سيارة تلحقك';
+                }
+            }
+        }
+        
+        // إضافة مستمع للزر
         window.addEventListener('load', function() {
-            updateCharacter();
-            updateCar();
-            gameLoop();
+            const startBtn = document.getElementById('startGameBtn');
+            if (startBtn) {
+                startBtn.addEventListener('click', toggleGame);
+            }
         });
         
         // تحديث عند تغيير حجم النافذة
