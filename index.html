@@ -1035,40 +1035,51 @@
             messageElement.className = 'floating-message';
             messageElement.textContent = message;
             
+            // إضافة العنصر مؤقتاً لحساب أبعاده
+            messageElement.style.visibility = 'hidden';
+            messageElement.style.position = 'absolute';
+            document.body.appendChild(messageElement);
+            
+            const messageWidth = messageElement.offsetWidth;
+            const messageHeight = messageElement.offsetHeight;
+            
+            // إعادة تعيين الستايل
+            messageElement.style.visibility = 'visible';
+            messageElement.style.position = 'fixed';
+            
             const container = document.querySelector('.container');
             const containerRect = container.getBoundingClientRect();
             
             // مناطق الجوانب (تجنب container)
             const side = Math.floor(Math.random() * 4); // 0: أعلى، 1: يمين، 2: أسفل، 3: يسار
             let x, y;
+            const padding = 20; // مسافة من الحواف
             
             switch(side) {
                 case 0: // أعلى
-                    x = Math.random() * window.innerWidth;
-                    y = Math.random() * containerRect.top;
+                    x = padding + Math.random() * (window.innerWidth - messageWidth - padding * 2);
+                    y = padding + Math.random() * Math.max(0, containerRect.top - messageHeight - padding * 2);
                     break;
                 case 1: // يمين
-                    x = containerRect.right + 20 + Math.random() * (window.innerWidth - containerRect.right - 40);
-                    y = Math.random() * window.innerHeight;
+                    x = containerRect.right + padding + Math.random() * Math.max(0, window.innerWidth - containerRect.right - messageWidth - padding * 2);
+                    y = padding + Math.random() * (window.innerHeight - messageHeight - padding * 2);
                     break;
                 case 2: // أسفل
-                    x = Math.random() * window.innerWidth;
-                    y = containerRect.bottom + 20 + Math.random() * (window.innerHeight - containerRect.bottom - 40);
+                    x = padding + Math.random() * (window.innerWidth - messageWidth - padding * 2);
+                    y = containerRect.bottom + padding + Math.random() * Math.max(0, window.innerHeight - containerRect.bottom - messageHeight - padding * 2);
                     break;
                 case 3: // يسار
-                    x = Math.random() * (containerRect.left - 20);
-                    y = Math.random() * window.innerHeight;
+                    x = padding + Math.random() * Math.max(0, containerRect.left - messageWidth - padding * 2);
+                    y = padding + Math.random() * (window.innerHeight - messageHeight - padding * 2);
                     break;
             }
             
             // التأكد من عدم الخروج عن حدود الشاشة
-            x = Math.max(10, Math.min(x, window.innerWidth - 10));
-            y = Math.max(10, Math.min(y, window.innerHeight - 10));
+            x = Math.max(padding, Math.min(x, window.innerWidth - messageWidth - padding));
+            y = Math.max(padding, Math.min(y, window.innerHeight - messageHeight - padding));
             
             messageElement.style.left = x + 'px';
             messageElement.style.top = y + 'px';
-            
-            document.body.appendChild(messageElement);
             
             // إزالة العنصر بعد انتهاء animation (3 ثوان)
             setTimeout(() => {
