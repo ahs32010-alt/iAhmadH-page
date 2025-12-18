@@ -27,6 +27,42 @@
             direction: rtl;
             position: relative;
             overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
+        .floating-message {
+            position: fixed;
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            pointer-events: none;
+            z-index: 50000;
+            white-space: nowrap;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            animation: floatMessage 3s ease-in-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes floatMessage {
+            0% {
+                opacity: 0;
+                transform: translateY(10px) scale(0.9);
+            }
+            15% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            85% {
+                opacity: 1;
+                transform: translateY(-10px) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.9);
+            }
         }
 
         .coffee-text-effect {
@@ -273,6 +309,13 @@
             }
         }
 
+        .profile-emoji {
+            font-size: 4em;
+            margin-bottom: 20px;
+            display: block;
+            line-height: 1;
+        }
+
         h1 {
             font-size: 3.5em;
             color: #1e3a5f;
@@ -282,7 +325,7 @@
 
         .name {
             font-size: 2em;
-            color: #4a90a4;
+            color: #bd4545;
             margin-bottom: 35px;
             font-weight: 600;
         }
@@ -527,6 +570,10 @@
         }
 
         @media (max-width: 768px) {
+            .profile-emoji {
+                font-size: 3em;
+            }
+            
             h1 {
                 font-size: 2.5em;
             }
@@ -563,6 +610,11 @@
 
             .game-note {
                 font-size: 0.9em;
+            }
+
+            .floating-message {
+                font-size: 0.75em;
+                padding: 6px 12px;
             }
 
             .game-button {
@@ -623,6 +675,7 @@
     <div class="coffee-fill"></div>
     <div class="coffee-text-effect">ترا كأني أعبي الصفحة قهوة، شرايك بالله؟</div>
     <div class="container">
+        <span class="profile-emoji">👳🏻‍♂️</span>
         <h1>يالله حيّهم..</h1>
         <div class="name">أنا أحمد سُليمان</div>
         <div class="description">والله مدري وش أحط بهالصفحة </div>
@@ -958,6 +1011,83 @@
         closeSnakeGameBtn.addEventListener('click', stopSnakeGame);
         snakeGameModal.addEventListener('click', (e) => {
             if (e.target === snakeGameModal) stopSnakeGame();
+        });
+        
+        // الجمل الديناميكية
+        const messages = [
+            'قلت أذكارك؟',
+            'الأكل الصحي مو تكرّم منك على نفسك',
+            'وقف حلطمة على دوامك',
+            'لا تستغرب إذا رجال كبير قال (ماما)',
+            'القهوة عمة الشاي',
+            'الشاي عم القهوة',
+            'السلام عليكم',
+            'أنت محبوب بس ما تدري',
+            'لا تستخسر في عطورك',
+            'الحب مو عذاب',
+            'جرب تجمع كل يوم ١٥ ريال على مدار سنة'
+
+        ];
+        
+        function showFloatingMessage() {
+            const message = messages[Math.floor(Math.random() * messages.length)];
+            const messageElement = document.createElement('div');
+            messageElement.className = 'floating-message';
+            messageElement.textContent = message;
+            
+            const container = document.querySelector('.container');
+            const containerRect = container.getBoundingClientRect();
+            
+            // مناطق الجوانب (تجنب container)
+            const side = Math.floor(Math.random() * 4); // 0: أعلى، 1: يمين، 2: أسفل، 3: يسار
+            let x, y;
+            
+            switch(side) {
+                case 0: // أعلى
+                    x = Math.random() * window.innerWidth;
+                    y = Math.random() * containerRect.top;
+                    break;
+                case 1: // يمين
+                    x = containerRect.right + 20 + Math.random() * (window.innerWidth - containerRect.right - 40);
+                    y = Math.random() * window.innerHeight;
+                    break;
+                case 2: // أسفل
+                    x = Math.random() * window.innerWidth;
+                    y = containerRect.bottom + 20 + Math.random() * (window.innerHeight - containerRect.bottom - 40);
+                    break;
+                case 3: // يسار
+                    x = Math.random() * (containerRect.left - 20);
+                    y = Math.random() * window.innerHeight;
+                    break;
+            }
+            
+            // التأكد من عدم الخروج عن حدود الشاشة
+            x = Math.max(10, Math.min(x, window.innerWidth - 10));
+            y = Math.max(10, Math.min(y, window.innerHeight - 10));
+            
+            messageElement.style.left = x + 'px';
+            messageElement.style.top = y + 'px';
+            
+            document.body.appendChild(messageElement);
+            
+            // إزالة العنصر بعد انتهاء animation (3 ثوان)
+            setTimeout(() => {
+                if (messageElement.parentNode) {
+                    messageElement.parentNode.removeChild(messageElement);
+                }
+            }, 3000);
+        }
+        
+        // عرض جملة بشكل متتالي
+        function startFloatingMessages() {
+            showFloatingMessage();
+            const interval = 800 + Math.random() * 400; // بين 0.8 و 1.2 ثانية (تظهر ورا بعض)
+            setTimeout(startFloatingMessages, interval);
+        }
+        
+        // بدء عرض الجمل بعد تحميل الصفحة
+        window.addEventListener('load', () => {
+            setTimeout(startFloatingMessages, 1000);
         });
     </script>
     <div class="social-section">
