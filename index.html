@@ -365,11 +365,15 @@
         }
 
         .social-section {
-            margin-top: 30px;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             text-align: center;
             animation: fadeIn 0.6s ease-out 0.4s both;
-            position: relative;
             z-index: 10;
+            width: 100%;
+            direction: rtl;
         }
 
         .social-title {
@@ -450,7 +454,7 @@
             }
 
             .coffee-text-effect {
-                font-size: 1.3em;
+                font-size: 1.1em;
                 padding: 30px 20px;
             }
         }
@@ -458,7 +462,7 @@
 </head>
 <body>
     <div class="coffee-fill"></div>
-    <div class="coffee-text-effect">ترا كأني أعبي الصفحة قهوة شريك؟</div>
+    <div class="coffee-text-effect">ترا كأني أعبي الصفحة قهوة، شرايك بالله؟</div>
     <div class="container">
         <h1>يالله حيّهم..</h1>
         <div class="name">أنا أحمد سُليمان</div>
@@ -468,14 +472,6 @@
             <a href="https://coffee.iahmadh.com" class="coffee-link" target="_blank">coffee.iahmadh.com</a>
             <div class="game-note">حطيت لك ألعاب عشان تتسلى لو طفشان</div>
             <button class="game-button" id="startGameBtn">سيارة تلحقك</button>
-        </div>
-    </div>
-    <div class="social-section">
-        <div class="social-title">وسائل التواصل:</div>
-        <div class="social-links">
-            <a href="https://t.me/iAhmadH" class="social-link" target="_blank">تليجرام</a>
-            <a href="https://www.snapchat.com/@iahmad_soliman" class="social-link" target="_blank">سناب</a>
-            <a href="mailto:Contact@iahmadh.com" class="social-link">إيميل</a>
         </div>
     </div>
     <div class="game-character" id="character"></div>
@@ -642,5 +638,13 @@
             updateCar();
         });
     </script>
+    <div class="social-section">
+        <div class="social-title">وسائل التواصل:</div>
+        <div class="social-links">
+            <a href="https://t.me/iAhmadH" class="social-link" target="_blank">تليجرام</a>
+            <a href="https://www.snapchat.com/@iahmad_soliman" class="social-link" target="_blank">سناب</a>
+            <a href="mailto:Contact@iahmadh.com" class="social-link">إيميل</a>
+        </div>
+    </div>
 </body>
 </html>
