@@ -36,14 +36,15 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             padding: 20px;
-            padding-bottom: 200px;
+            padding-top: 40px;
+            padding-bottom: 40px;
             direction: rtl;
             position: relative;
             overflow-x: hidden;
-            overflow-y: hidden;
+            overflow-y: auto;
         }
 
         .floating-message {
@@ -606,15 +607,14 @@
         }
 
         .social-section {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            position: relative;
             text-align: center;
             z-index: 10000;
             width: 100%;
             direction: rtl;
             opacity: 1 !important;
+            margin-top: 100px;
+            padding-bottom: 40px;
         }
 
         .social-title {
@@ -716,7 +716,12 @@
             }
 
             body {
-                padding-bottom: 150px;
+                padding-bottom: 40px;
+            }
+
+            .social-section {
+                margin-top: 60px;
+                padding-bottom: 30px;
             }
 
             .game-note {
