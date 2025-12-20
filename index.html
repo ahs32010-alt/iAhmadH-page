@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مرحباً - Ahmad Soliman</title>
+    <title>Ahmad Soliman - أحمد سليمان</title>
     
-    <!-- Open Graph Meta Tags للصورة عند المشاركة -->
-    <meta property="og:image" content="https://iahmadh.com/profile.jpg">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:image" content="https://iahmadh.com/og-image.jpg">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -16,10 +16,10 @@
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://iahmadh.com/profile.jpg">
+    <meta name="twitter:image" content="https://iahmadh.com/og-image.jpg">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="profile.jpg">
+    <link rel="icon" type="image/png" href="profile.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -32,21 +32,249 @@
 
         body {
             font-family: 'Tajawal', sans-serif;
-            background: linear-gradient(135deg, #5280ad 0%, #103456 50%, #001c36 100%);
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+            overflow-x: hidden;
+        }
+
+        /* Header Section - Blue Background */
+        .header-section {
+            background-image: url('header-background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #000000; /* لون احتياطي في حالة عدم وجود الصورة */
+            color: white;
+            padding: 40px 20px 60px;
+            text-align: center;
+            position: relative;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
-            padding: 20px;
-            padding-top: 40px;
-            padding-bottom: 40px;
-            direction: rtl;
-            position: relative;
-            overflow-x: hidden;
-            overflow-y: auto;
         }
 
+        /* Overlay داكن لتحسين قراءة النص */
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+        }
+
+        .header-section > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .lang-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white;
+            color: #333;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 500;
+        }
+
+        .brand-name {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        .profile-image-wrapper {
+            margin-bottom: 35px;
+            width: 140px;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 5px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-image-header {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            object-fit: contain;
+        }
+
+        .header-name {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .header-bio {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            max-width: 600px;
+            opacity: 0.95;
+        }
+
+        .location {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            font-size: 1em;
+        }
+
+        .location-icon {
+            font-size: 1.2em;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            overflow: hidden;
+        }
+
+        .social-icon img {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        .social-icon:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .social-icon:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Content Section - White Background with Cards */
+        .content-section {
+            background: #f8f9fa;
+            padding: 60px 20px;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ============================================
+           إعدادات فيديو الخلفية - Background Video Settings
+           ============================================
+           لتعديل وضوح الفيديو: غيّر قيمة opacity (من 0.1 إلى 1.0)
+           لتعديل تأثير الضبابية: غيّر قيمة blur (من 0px إلى 20px)
+           ============================================ */
+        .background-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            filter: blur(5px); /* تأثير الضبابية - غيّر من 0px إلى 20px */
+            opacity: 1; /* وضوح الفيديو - غيّر من 0.1 (خافت) إلى 1.0 (واضح جداً) */
+            object-fit: contain; /* يظهر الفيديو كاملاً بدون تكبير أو قص */
+        }
+
+        .cards-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px 50px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            color: #2c3e50;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-card.purple {
+            background: linear-gradient(135deg, #b4a7d6 0%, #9b8cc2 100%);
+        }
+
+        .card-icon {
+            font-size: 2.5em;
+            margin-bottom: 0;
+        }
+
+        .card-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .card-title {
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        .footer {
+            background: #f8f9fa;
+            text-align: center;
+            padding: 30px 20px;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        /* Floating Messages */
         .floating-message {
             position: fixed;
             font-size: 0.9em;
@@ -82,6 +310,26 @@
             }
         }
 
+        /* Coffee Fill Effect */
+        .coffee-fill {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: linear-gradient(to top, #3e2723 0%, #5d4037 20%, #6d4c41 50%, #8d6e63 80%, #a1887f 100%);
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0;
+            overflow: hidden;
+            transition: opacity 0.3s ease;
+        }
+
+        .coffee-fill.active {
+            opacity: 0.85;
+            animation: pourLiquid 15s ease-in forwards;
+        }
+
         .coffee-text-effect {
             position: fixed;
             bottom: 0;
@@ -103,6 +351,25 @@
             animation: textRise 15s ease-in forwards;
         }
 
+        @keyframes pourLiquid {
+            0% {
+                height: 0%;
+                bottom: 0;
+            }
+            50% {
+                height: 50%;
+                bottom: 0;
+            }
+            90% {
+                height: 95%;
+                bottom: 0;
+            }
+            100% {
+                height: 100%;
+                bottom: 0;
+            }
+        }
+
         @keyframes textRise {
             0% {
                 bottom: 80px;
@@ -120,23 +387,23 @@
             }
         }
 
-        .coffee-fill {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 0%;
-            background: linear-gradient(to top, #3e2723 0%, #5d4037 20%, #6d4c41 50%, #8d6e63 80%, #a1887f 100%);
-            z-index: 1;
-            pointer-events: none;
-            opacity: 0;
-            overflow: hidden;
-            transition: opacity 0.3s ease;
-        }
-
-        .coffee-fill.active {
-            opacity: 0.85;
-            animation: pourLiquid 15s ease-in forwards;
+        @keyframes waveAnimation1 {
+            0%, 100% {
+                transform: translateX(0) translateY(0);
+                border-radius: 50% 50% 60% 60% / 0% 0% 40% 40%;
+            }
+            25% {
+                transform: translateX(15px) translateY(10px);
+                border-radius: 55% 45% 65% 55% / 0% 0% 45% 35%;
+            }
+            50% {
+                transform: translateX(-15px) translateY(8px);
+                border-radius: 45% 55% 55% 65% / 0% 0% 35% 45%;
+            }
+            75% {
+                transform: translateX(8px) translateY(12px);
+                border-radius: 50% 50% 60% 60% / 0% 0% 40% 40%;
+            }
         }
 
         .coffee-fill::before {
@@ -163,44 +430,6 @@
             animation: waveAnimation2 3s ease-in-out infinite;
         }
 
-        @keyframes pourLiquid {
-            0% {
-                height: 0%;
-                bottom: 0;
-            }
-            50% {
-                height: 50%;
-                bottom: 0;
-            }
-            90% {
-                height: 95%;
-                bottom: 0;
-            }
-            100% {
-                height: 100%;
-                bottom: 0;
-            }
-        }
-
-        @keyframes waveAnimation1 {
-            0%, 100% {
-                transform: translateX(0) translateY(0);
-                border-radius: 50% 50% 60% 60% / 0% 0% 40% 40%;
-            }
-            25% {
-                transform: translateX(15px) translateY(10px);
-                border-radius: 55% 45% 65% 55% / 0% 0% 45% 35%;
-            }
-            50% {
-                transform: translateX(-15px) translateY(8px);
-                border-radius: 45% 55% 55% 65% / 0% 0% 35% 45%;
-            }
-            75% {
-                transform: translateX(8px) translateY(12px);
-                border-radius: 50% 50% 60% 60% / 0% 0% 40% 40%;
-            }
-        }
-
         @keyframes waveAnimation2 {
             0%, 100% {
                 transform: translateX(0) translateY(0);
@@ -216,940 +445,164 @@
             }
         }
 
-        .game-character {
-            position: absolute;
-            width: 45px;
-            height: 45px;
-            z-index: 2;
-            transition: left 0.3s ease-out, top 0.3s ease-out;
-            pointer-events: none;
-            top: 50%;
-            left: 50%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            line-height: 1;
-            transform: translate(0, 0);
-        }
-
-        .game-character.active {
-            display: flex;
-        }
-
-        .game-character::before {
-            content: '👳🏻‍♂️';
-        }
-
-        .game-character.collision {
-            animation: collisionShake 0.5s ease;
-        }
-
-        .game-car.collision {
-            animation: collisionShake 0.5s ease;
-        }
-
-        @keyframes collisionShake {
-            0%, 100% { 
-                transform: translate(0, 0) rotate(0deg);
-            }
-            10% { 
-                transform: translate(-15px, -15px) rotate(-8deg) scale(1.1);
-            }
-            20% { 
-                transform: translate(15px, 15px) rotate(8deg) scale(1.1);
-            }
-            30% { 
-                transform: translate(-15px, 15px) rotate(-8deg) scale(1.1);
-            }
-            40% { 
-                transform: translate(15px, -15px) rotate(8deg) scale(1.1);
-            }
-            50% { 
-                transform: translate(-10px, -10px) rotate(-5deg) scale(1.05);
-            }
-            60% { 
-                transform: translate(10px, 10px) rotate(5deg) scale(1.05);
-            }
-            70% { 
-                transform: translate(-5px, 5px) rotate(-3deg);
-            }
-            80% { 
-                transform: translate(5px, -5px) rotate(3deg);
-            }
-            90% { 
-                transform: translate(-3px, -3px) rotate(-1deg);
-            }
-        }
-
-        .game-car {
-            position: absolute;
-            width: 90px;
-            height: 55px;
-            z-index: 1;
-            transition: left 0.05s linear, top 0.05s linear;
-            pointer-events: none;
-            top: 20%;
-            left: 20%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            font-size: 50px;
-            line-height: 1;
-            transform: translate(0, 0);
-        }
-
-        .game-car.active {
-            display: flex;
-        }
-
-        .game-car::after {
-            content: '🚗';
-        }
-
-        .profile-image {
-            width: 120px;
-            height: 120px;
-            border-radius: 15px;
-            object-fit: cover;
-            display: block;
-            margin: 0 auto 20px auto;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .profile-image:hover {
-            transform: scale(1.05);
-        }
-
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 70px 60px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            max-width: 700px;
-            width: 100%;
-            animation: fadeIn 0.6s ease-out;
-            position: relative;
-            z-index: 10;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            margin-top: 40px;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .profile-emoji {
-            font-size: 4em;
-            margin-bottom: 20px;
-            display: block;
-            line-height: 1;
-        }
-
-        h1 {
-            font-size: 3.5em;
-            color: #1e3a5f;
-            margin-bottom: 35px;
-            font-weight: 700;
-        }
-
-        .name {
-            font-size: 2em;
-            color: #bd4545;
-            margin-bottom: 35px;
-            font-weight: 600;
-        }
-
-        .description {
-            font-size: 1.6em;
-            color: #1e3a5f;
-            margin-bottom: 45px;
-            line-height: 1.8;
-            font-weight: 400;
-        }
-
-        .coffee-section {
-            margin-top: 35px;
-            animation: fadeIn 0.6s ease-out 0.2s both;
-        }
-
-        .coffee-text {
-            font-size: 1.3em;
-            color: #1e3a5f;
-            margin-bottom: 25px;
-            font-weight: 500;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
-            }
-            50% {
-                transform: scale(1.05);
-                box-shadow: 0 6px 25px rgba(231, 76, 60, 0.5);
-            }
-            100% {
-                transform: scale(1);
-                box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
-            }
-        }
-
-        .coffee-link {
-            display: inline-block;
-            background: linear-gradient(135deg, #e74c3c 0%, #e63d2a 100%);
-            color: white;
-            text-decoration: none;
-            padding: 16px 40px;
-            border-radius: 8px;
-            font-size: 1.3em;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .coffee-link:hover {
-            animation-play-state: paused;
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
-            background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
-        }
-
-        .coffee-link:active {
-            transform: translateY(-1px);
-        }
-
+        /* Coffee Fill Button */
         .coffee-fill-btn {
-            display: block;
-            width: fit-content;
-            margin: 25px auto 0;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
             background: linear-gradient(135deg, #8d6e63 0%, #6d4c41 100%);
             color: white;
             border: none;
-            padding: 14px 35px;
-            border-radius: 8px;
-            font-size: 1.1em;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 0.9em;
             font-weight: 600;
             font-family: 'Tajawal', sans-serif;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(109, 76, 65, 0.3);
+            z-index: 1000;
         }
 
         .coffee-fill-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(109, 76, 65, 0.4);
-            background: linear-gradient(135deg, #6d4c41 0%, #5d4037 100%);
         }
 
-        .coffee-fill-btn:active {
-            transform: translateY(0);
-        }
-
-        .game-note {
-            font-size: 1.5em;
-            color: #f5f6ff;
-            margin-top: 20px;
-            font-weight: 400;
-            font-style: italic;
-            display: none; /* مخفي حتى اشعار آخر */
-        }
-
-        .game-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #4a90a4 0%, #3498db 100%);
-            color: white;
-            text-decoration: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-size: 1.1em;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(74, 144, 164, 0.3);
-            cursor: pointer;
-            border: none;
-            margin-top: 15px;
-        }
-
-        .game-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(74, 144, 164, 0.4);
-            background: linear-gradient(135deg, #3498db 0%, #4a90a4 100%);
-        }
-
-        .game-button:active {
-            transform: translateY(0);
-        }
-
-        .game-buttons {
-            display: none !important; /* مخفي حتى اشعار آخر */
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 15px;
-        }
-
-        /* الألعاب مخفية حتى اشعار آخر */
-        .game-modal {
-            display: none !important; /* مخفي حتى اشعار آخر */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 20000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .game-modal.active {
-            display: none !important; /* مخفي حتى اشعار آخر */
-        }
-
-        .game-modal-content {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 20px;
-            max-width: 90%;
-            max-height: 90%;
-            position: relative;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 35px;
-            height: 35px;
-            cursor: pointer;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 20001;
-            transition: all 0.3s ease;
-        }
-
-        .close-modal:hover {
-            background: #c0392b;
-            transform: scale(1.1);
-        }
-
-        .game-area {
-            width: 600px;
-            height: 400px;
-            position: relative;
-            background: linear-gradient(135deg, #5280ad 0%, #103456 100%);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .snake-game-area {
-            width: 600px;
-            height: 400px;
-            position: relative;
-            background: #1a1a2e;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 3px solid #16213e;
-        }
-
-        .snake-controls {
-            display: none;
-            margin-top: 20px;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .snake-controls-row {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .snake-control-btn {
-            width: 60px;
-            height: 60px;
-            background: #4a90a4;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 24px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 10px rgba(74, 144, 164, 0.3);
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        .snake-control-btn:active {
-            background: #3498db;
-            transform: scale(0.95);
-        }
-
-        .social-section {
-            position: relative;
-            text-align: center;
-            z-index: 10000;
-            width: 100%;
-            direction: rtl;
-            opacity: 1 !important;
-            margin-top: 100px;
-            padding-bottom: 40px;
-        }
-
-        .social-title {
-            font-size: 1.2em;
-            color: #ffffff;
-            margin-bottom: 15px;
-            font-weight: 500;
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            direction: rtl;
-        }
-
-        .social-link {
-            display: inline-block;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 0.85em;
-            font-weight: 500;
-            padding: 6px 14px;
-            border: 1.5px solid #ffffff;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
-        }
-
-        .social-link:hover {
-            background: #ffffff;
-            color: #103456;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
-        }
-
-        .email-footer {
-            text-align: center;
-            color: #ffffff;
-            font-size: 0.9em;
-            direction: ltr;
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
-            margin-top: 15px;
-        }
-
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .profile-emoji {
-                font-size: 3em;
+            .header-section {
+                padding: 30px 15px 40px;
+                min-height: auto;
             }
-            
-            h1 {
-                font-size: 2em;
+
+            .lang-toggle {
+                top: 15px;
+                left: 15px;
+                padding: 6px 15px;
+                font-size: 0.8em;
             }
-            
-            .name {
-                font-size: 1.6em;
-            }
-            
-            .description {
+
+            .brand-name {
+                top: 15px;
+                right: 15px;
                 font-size: 1.2em;
             }
-            
-            .container {
-                padding: 50px 35px;
-                margin-top: 10px;
+
+            .profile-image-wrapper {
+                width: 140px;
+                height: 135px;
+                border-radius: 12px;
+                padding: 4px;
             }
 
-            .coffee-link {
-                font-size: 1.1em;
-                padding: 14px 35px;
+            .profile-image-header {
+                border-radius: 10px;
+            }
+
+            .header-name {
+                font-size: 1.8em;
+            }
+
+            .header-bio {
+                font-size: 1em;
+                padding: 0 10px;
+            }
+
+            .cards-container {
+                padding: 15px;
+            }
+
+            .content-card {
+                padding: 20px 35px;
+                flex-direction: row;
+                gap: 12px;
+            }
+
+            .card-icon {
+                font-size: 2em;
+            }
+
+            .card-title {
+                font-size: 1.5em;
             }
 
             .coffee-fill-btn {
-                font-size: 1em;
-                padding: 12px 30px;
-                margin-top: 18px;
-            }
-
-            .profile-image {
-                width: 100px;
-                height: 100px;
-                border-radius: 12px;
-            }
-
-            .social-title {
-                font-size: 1em;
-            }
-
-            .social-link {
-                font-size: 0.75em;
-                padding: 5px 12px;
-            }
-
-            .email-footer {
-                font-size: 0.75em;
-                margin-top: 12px;
-            }
-
-            body {
-                padding-bottom: 40px;
-            }
-
-            .social-section {
-                margin-top: 60px;
-                padding-bottom: 30px;
-            }
-
-            .game-note {
-                font-size: 0.9em;
+                bottom: 20px;
+                right: 20px;
+                padding: 10px 20px;
+                font-size: 0.85em;
             }
 
             .floating-message {
                 font-size: 0.75em;
                 padding: 6px 12px;
             }
-
-            .game-button {
-                font-size: 1em;
-                padding: 10px 25px;
-            }
-
-            .wheel-button {
-                font-size: 1em;
-                padding: 10px 25px;
-            }
-
-            .wheel-container {
-                width: 300px;
-                height: 300px;
-            }
-
-            .wheel-modal-content {
-                padding: 20px;
-            }
-
-            .wheel-title {
-                font-size: 1.5em;
-            }
-
-            .coffee-text-effect {
-                font-size: 1.1em;
-                padding: 30px 20px;
-            }
-
-            .game-modal-content {
-                max-width: 95%;
-                max-height: 95%;
-                padding: 15px;
-            }
-
-            .game-area {
-                width: calc(100vw - 60px);
-                max-width: 500px;
-                height: calc(100vh - 150px);
-                max-height: 400px;
-            }
-
-            .snake-game-area {
-                width: calc(100vw - 60px);
-                max-width: 500px;
-                height: calc(100vh - 250px);
-                max-height: 350px;
-            }
-
-            .snake-controls {
-                display: flex;
-            }
-
-            .snake-control-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-            }
-
-            .game-character {
-                font-size: 35px;
-                width: 40px;
-                height: 40px;
-            }
-
-            .game-car {
-                font-size: 40px;
-                width: 75px;
-                height: 50px;
-            }
         }
     </style>
 </head>
 <body>
+    <!-- Coffee Fill Effect -->
     <div class="coffee-fill"></div>
     <div class="coffee-text-effect">جالس أعبي الصفحة قهوة</div>
-    <div class="container">
-        <img src="profile.jpg" alt="Ahmad Soliman" class="profile-image">
-        <h1>يالله حيّهم..</h1>
-        <div class="name">أنا أحمد سُليمان 👳🏻‍♂️</div>
-        <div class="description">والله مدري وش أحط بهالصفحة </div>
-        <div class="coffee-section">
-            <div class="coffee-text">لكن ادخل سوي قهوتك هنا:</div>
-            <a href="https://coffee.iahmadh.com" class="coffee-link" target="_blank">coffee.iahmadh.com</a>
-            <button class="coffee-fill-btn" id="coffeeFillBtn">أو تقهو هنا</button>
-            <div class="game-note">  </div>
-            <div class="game-note">  </div>
-            <div class="game-note">  </div>
 
-            <div class="game-note">حطيت لك ألعاب عشان تتسلى لو طفشان</div>
-            <div class="game-buttons">
-                <button class="game-button" id="openCarGameBtn">سيارة تلحقك</button>
-                <button class="game-button" id="openSnakeGameBtn">لعبة الثعبان</button>
-            </div>
+    <!-- Header Section -->
+    <section class="header-section">
+        <div class="brand-name"></div>
+        
+        <div class="profile-image-wrapper">
+            <img src="profile.jpg" alt="Ahmad Soliman" class="profile-image-header">
         </div>
-    </div>
-    
-    <!-- Popup لعبة السيارة -->
-    <div class="game-modal" id="carGameModal">
-        <div class="game-modal-content">
-            <button class="close-modal" id="closeCarGame">×</button>
-            <div class="game-area" id="carGameArea">
-                <div class="game-character" id="character"></div>
-                <div class="game-car" id="car"></div>
-            </div>
-        </div>
-    </div>
+        
+        <h1 class="header-name">أحمد سُليمان</h1>
+        
+        <p class="header-bio">
+            مطور و مصمم، أهتم بإنشاء تجارب رقمية مميزة. 
+            تركيزي الحالي على تطوير تطبيقات الويب وتصميم واجهات المستخدم.
+        </p>
+        
+        <div class="location">
+            <span>الدمام | المنطقة الشرقية</span>
+            <span class="location-icon">📍</span>
 
-    <!-- Popup لعبة الثعبان -->
-    <div class="game-modal" id="snakeGameModal">
-        <div class="game-modal-content">
-            <button class="close-modal" id="closeSnakeGame">×</button>
-            <canvas id="snakeCanvas" class="snake-game-area"></canvas>
-            <div class="snake-controls">
-                <div class="snake-controls-row">
-                    <button class="snake-control-btn" id="snakeUp">↑</button>
-                </div>
-                <div class="snake-controls-row">
-                    <button class="snake-control-btn" id="snakeLeft">←</button>
-                    <button class="snake-control-btn" id="snakeDown">↓</button>
-                    <button class="snake-control-btn" id="snakeRight">→</button>
-                </div>
-            </div>
         </div>
-    </div>
+        
+        <div class="social-icons">
+            <a href="mailto:Contact@iahmadh.com" class="social-icon" title="Email">
+                <img src="email-icon.png" alt="Email">
+            </a>
+            <a href="https://t.me/iAhmadH" target="_blank" class="social-icon" title="Telegram">
+                <img src="telegram-icon.png" alt="Telegram">
+            </a>
+            <a href="https://www.snapchat.com/@iahmad_soliman" target="_blank" class="social-icon" title="Snapchat">
+                <img src="snapchat-icon.png" alt="Snapchat">
+            </a>
+        </div>
+    </section>
 
+    <!-- Content Section -->
+    <section class="content-section">
+        <video class="background-video" autoplay muted loop playsinline>
+            <source src="background-video.mp4" type="video/mp4">
+            <source src="background-video.webm" type="video/webm">
+        </video>
+        <div class="cards-container">
+            <a href="https://coffee.iahmadh.com" target="_blank" class="content-card">
+                <div class="card-icon">☕</div>
+                <div class="card-title">حاسبة القهوة</div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        © 2025 أحمد سُليمان
+    </footer>
+
+    <!-- Coffee Fill Button -->
+    <button class="coffee-fill-btn" id="coffeeFillBtn">تقهو</button>
 
     <script>
-        // لعبة السيارة
-        const carGameModal = document.getElementById('carGameModal');
-        const openCarGameBtn = document.getElementById('openCarGameBtn');
-        const closeCarGameBtn = document.getElementById('closeCarGame');
-        const character = document.getElementById('character');
-        const car = document.getElementById('car');
-        const carGameArea = document.getElementById('carGameArea');
-        
-        let carGameRunning = false;
-        let mouseX = 300;
-        let mouseY = 200;
-        let carX = 120;
-        let carY = 80;
-        const characterSize = 45;
-        const carSize = 90;
-        const carSpeed = 2.5;
-        let collisionCooldown = false;
-        let carGameLoopId = null;
-        
-        function updateCharacter() {
-            const rect = carGameArea.getBoundingClientRect();
-            const maxX = rect.width - characterSize;
-            const maxY = rect.height - characterSize;
-            
-            mouseX = Math.max(characterSize / 2, Math.min(mouseX, maxX - characterSize / 2));
-            mouseY = Math.max(characterSize / 2, Math.min(mouseY, maxY - characterSize / 2));
-            
-            character.style.left = (mouseX - characterSize / 2) + 'px';
-            character.style.top = (mouseY - characterSize / 2) + 'px';
-        }
-        
-        function updateCar() {
-            const rect = carGameArea.getBoundingClientRect();
-            const dx = mouseX - carX;
-            const dy = mouseY - carY;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            
-            if (distance > 5) {
-                carX += (dx / distance) * carSpeed;
-                carY += (dy / distance) * carSpeed;
-            }
-            
-            const maxX = rect.width - carSize / 2;
-            const maxY = rect.height - carSize / 2;
-            carX = Math.max(carSize / 2, Math.min(carX, maxX));
-            carY = Math.max(carSize / 2, Math.min(carY, maxY));
-            
-            car.style.left = (carX - carSize / 2) + 'px';
-            car.style.top = (carY - carSize / 2) + 'px';
-        }
-        
-        function checkCollision() {
-            const distance = Math.sqrt(Math.pow(mouseX - carX, 2) + Math.pow(mouseY - carY, 2));
-            
-            if (distance < 50 && !collisionCooldown) {
-                character.classList.add('collision');
-                car.classList.add('collision');
-                collisionCooldown = true;
-                
-                setTimeout(() => {
-                    character.classList.remove('collision');
-                    car.classList.remove('collision');
-                }, 500);
-                
-                setTimeout(() => {
-                    const rect = carGameArea.getBoundingClientRect();
-                    mouseX = rect.width / 2;
-                    mouseY = rect.height / 2;
-                    carX = rect.width * 0.2;
-                    carY = rect.height * 0.2;
-                    updateCharacter();
-                    updateCar();
-                    collisionCooldown = false;
-                }, 600);
-            }
-        }
-        
-        function carGameLoop() {
-            if (carGameRunning) {
-                updateCar();
-                checkCollision();
-                carGameLoopId = requestAnimationFrame(carGameLoop);
-            }
-        }
-        
-        function startCarGame() {
-            carGameModal.classList.add('active');
-            carGameRunning = true;
-            character.classList.add('active');
-            car.classList.add('active');
-            
-            const rect = carGameArea.getBoundingClientRect();
-            mouseX = rect.width / 2;
-            mouseY = rect.height / 2;
-            carX = rect.width * 0.2;
-            carY = rect.height * 0.2;
-            
-            updateCharacter();
-            updateCar();
-            carGameLoop();
-            
-            carGameArea.addEventListener('mousemove', handleCarMove);
-            carGameArea.addEventListener('touchmove', handleCarMove, { passive: true });
-        }
-        
-        function stopCarGame() {
-            carGameModal.classList.remove('active');
-            carGameRunning = false;
-            character.classList.remove('active');
-            car.classList.remove('active');
-            if (carGameLoopId) cancelAnimationFrame(carGameLoopId);
-            
-            carGameArea.removeEventListener('mousemove', handleCarMove);
-            carGameArea.removeEventListener('touchmove', handleCarMove);
-        }
-        
-        function handleCarMove(e) {
-            if (!carGameRunning) return;
-            const rect = carGameArea.getBoundingClientRect();
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            
-            mouseX = clientX - rect.left;
-            mouseY = clientY - rect.top;
-            updateCharacter();
-        }
-        
-        openCarGameBtn.addEventListener('click', startCarGame);
-        closeCarGameBtn.addEventListener('click', stopCarGame);
-        carGameModal.addEventListener('click', (e) => {
-            if (e.target === carGameModal) stopCarGame();
-        });
-        
-        // لعبة الثعبان
-        const snakeGameModal = document.getElementById('snakeGameModal');
-        const openSnakeGameBtn = document.getElementById('openSnakeGameBtn');
-        const closeSnakeGameBtn = document.getElementById('closeSnakeGame');
-        const snakeCanvas = document.getElementById('snakeCanvas');
-        const ctx = snakeCanvas.getContext('2d');
-        const snakeUpBtn = document.getElementById('snakeUp');
-        const snakeDownBtn = document.getElementById('snakeDown');
-        const snakeLeftBtn = document.getElementById('snakeLeft');
-        const snakeRightBtn = document.getElementById('snakeRight');
-        
-        function resizeSnakeCanvas() {
-            const container = snakeCanvas.parentElement;
-            const computedStyle = window.getComputedStyle(container);
-            const maxWidth = parseInt(computedStyle.maxWidth) || 600;
-            const maxHeight = parseInt(computedStyle.maxHeight) || 400;
-            
-            if (window.innerWidth < 768) {
-                snakeCanvas.width = Math.min(window.innerWidth - 60, maxWidth);
-                snakeCanvas.height = Math.min(window.innerHeight - 250, maxHeight);
-            } else {
-                snakeCanvas.width = 600;
-                snakeCanvas.height = 400;
-            }
-            snakeCanvas.width = Math.floor(snakeCanvas.width / 20) * 20;
-            snakeCanvas.height = Math.floor(snakeCanvas.height / 20) * 20;
-        }
-        
-        resizeSnakeCanvas();
-        
-        let snake = [];
-        let dx = 20;
-        let dy = 0;
-        let food = {x: 100, y: 100};
-        let snakeGameRunning = false;
-        let snakeGameLoopId = null;
-        let score = 0;
-        
-        function drawSnake() {
-            ctx.fillStyle = '#4ecdc4';
-            snake.forEach(segment => {
-                ctx.fillRect(segment.x, segment.y, 18, 18);
-                ctx.strokeStyle = '#2ecc71';
-                ctx.strokeRect(segment.x, segment.y, 18, 18);
-            });
-        }
-        
-        function drawFood() {
-            ctx.fillStyle = '#e74c3c';
-            ctx.fillRect(food.x, food.y, 18, 18);
-        }
-        
-        function moveSnake() {
-            const head = {x: snake[0].x + dx, y: snake[0].y + dy};
-            
-            if (head.x < 0) head.x = snakeCanvas.width - 20;
-            if (head.x >= snakeCanvas.width) head.x = 0;
-            if (head.y < 0) head.y = snakeCanvas.height - 20;
-            if (head.y >= snakeCanvas.height) head.y = 0;
-            
-            snake.unshift(head);
-            
-            if (head.x === food.x && head.y === food.y) {
-                score++;
-                food = {
-                    x: Math.floor(Math.random() * (snakeCanvas.width / 20)) * 20,
-                    y: Math.floor(Math.random() * (snakeCanvas.height / 20)) * 20
-                };
-            } else {
-                snake.pop();
-            }
-            
-            for (let i = 1; i < snake.length; i++) {
-                if (snake[i].x === head.x && snake[i].y === head.y) {
-                    stopSnakeGame();
-                    return;
-                }
-            }
-        }
-        
-        let lastTime = 0;
-        function snakeGameLoop(currentTime) {
-            if (!snakeGameRunning) return;
-            
-            if (currentTime - lastTime >= 150) {
-                ctx.fillStyle = '#1a1a2e';
-                ctx.fillRect(0, 0, snakeCanvas.width, snakeCanvas.height);
-                
-                moveSnake();
-                drawFood();
-                drawSnake();
-                
-                lastTime = currentTime;
-            }
-            
-            snakeGameLoopId = requestAnimationFrame(snakeGameLoop);
-        }
-        
-        const handleSnakeUp = () => { if (snakeGameRunning && dy === 0) { dx = 0; dy = -20; } };
-        const handleSnakeDown = () => { if (snakeGameRunning && dy === 0) { dx = 0; dy = 20; } };
-        const handleSnakeLeft = () => { if (snakeGameRunning && dx === 0) { dx = -20; dy = 0; } };
-        const handleSnakeRight = () => { if (snakeGameRunning && dx === 0) { dx = 20; dy = 0; } };
-        
-        snakeUpBtn.addEventListener('touchstart', handleSnakeUp, {passive: true});
-        snakeDownBtn.addEventListener('touchstart', handleSnakeDown, {passive: true});
-        snakeLeftBtn.addEventListener('touchstart', handleSnakeLeft, {passive: true});
-        snakeRightBtn.addEventListener('touchstart', handleSnakeRight, {passive: true});
-        snakeUpBtn.addEventListener('click', handleSnakeUp);
-        snakeDownBtn.addEventListener('click', handleSnakeDown);
-        snakeLeftBtn.addEventListener('click', handleSnakeLeft);
-        snakeRightBtn.addEventListener('click', handleSnakeRight);
-        
-        function startSnakeGame() {
-            snakeGameModal.classList.add('active');
-            setTimeout(() => {
-                resizeSnakeCanvas();
-                snakeGameRunning = true;
-                const startX = Math.floor(snakeCanvas.width / 2 / 20) * 20;
-                const startY = Math.floor(snakeCanvas.height / 2 / 20) * 20;
-                snake = [{x: startX, y: startY}];
-                dx = 20;
-                dy = 0;
-                score = 0;
-                food = {
-                    x: Math.floor(Math.random() * (snakeCanvas.width / 20)) * 20,
-                    y: Math.floor(Math.random() * (snakeCanvas.height / 20)) * 20
-                };
-                snakeGameLoop();
-            }, 100);
-            
-            document.addEventListener('keydown', handleSnakeKey);
-        }
-        
-        function stopSnakeGame() {
-            snakeGameModal.classList.remove('active');
-            snakeGameRunning = false;
-            if (snakeGameLoopId) cancelAnimationFrame(snakeGameLoopId);
-            document.removeEventListener('keydown', handleSnakeKey);
-            lastTime = 0;
-        }
-        
-        function handleSnakeKey(e) {
-            if (!snakeGameRunning) return;
-            
-            const key = e.key;
-            if (key === 'ArrowUp' && dy === 0) { dx = 0; dy = -20; }
-            if (key === 'ArrowDown' && dy === 0) { dx = 0; dy = 20; }
-            if (key === 'ArrowLeft' && dx === 0) { dx = -20; dy = 0; }
-            if (key === 'ArrowRight' && dx === 0) { dx = 20; dy = 0; }
-        }
-        
-        openSnakeGameBtn.addEventListener('click', startSnakeGame);
-        closeSnakeGameBtn.addEventListener('click', stopSnakeGame);
-        snakeGameModal.addEventListener('click', (e) => {
-            if (e.target === snakeGameModal) stopSnakeGame();
-        });
-        
         // الجمل الديناميكية
         const messages = [
             'قلت أذكارك؟',
@@ -1164,100 +617,86 @@
             'لا تستخسر في عطورك',
             'الحب مو عذاب',
             'جرب تجمع كل يوم ١٥ ريال على مدار سنة'
-
         ];
-        
+
         function showFloatingMessage() {
             const message = messages[Math.floor(Math.random() * messages.length)];
             const messageElement = document.createElement('div');
             messageElement.className = 'floating-message';
             messageElement.textContent = message;
-            
-            // إضافة العنصر مؤقتاً لحساب أبعاده
+
             messageElement.style.visibility = 'hidden';
             messageElement.style.position = 'absolute';
             document.body.appendChild(messageElement);
-            
+
             const messageWidth = messageElement.offsetWidth;
             const messageHeight = messageElement.offsetHeight;
-            
-            // إعادة تعيين الستايل
+
             messageElement.style.visibility = 'visible';
             messageElement.style.position = 'fixed';
-            
-            const container = document.querySelector('.container');
-            const containerRect = container.getBoundingClientRect();
-            
-            // مناطق الجوانب (تجنب container)
-            const side = Math.floor(Math.random() * 4); // 0: أعلى، 1: يمين، 2: أسفل، 3: يسار
-            let x, y;
-            const padding = 20; // مسافة من الحواف
-            
-            switch(side) {
-                case 0: // أعلى
-                    x = padding + Math.random() * (window.innerWidth - messageWidth - padding * 2);
-                    y = padding + Math.random() * Math.max(0, containerRect.top - messageHeight - padding * 2);
-                    break;
-                case 1: // يمين
-                    x = containerRect.right + padding + Math.random() * Math.max(0, window.innerWidth - containerRect.right - messageWidth - padding * 2);
-                    y = padding + Math.random() * (window.innerHeight - messageHeight - padding * 2);
-                    break;
-                case 2: // أسفل
-                    x = padding + Math.random() * (window.innerWidth - messageWidth - padding * 2);
-                    y = containerRect.bottom + padding + Math.random() * Math.max(0, window.innerHeight - containerRect.bottom - messageHeight - padding * 2);
-                    break;
-                case 3: // يسار
-                    x = padding + Math.random() * Math.max(0, containerRect.left - messageWidth - padding * 2);
-                    y = padding + Math.random() * (window.innerHeight - messageHeight - padding * 2);
-                    break;
-            }
-            
-            // التأكد من عدم الخروج عن حدود الشاشة
-            x = Math.max(padding, Math.min(x, window.innerWidth - messageWidth - padding));
-            y = Math.max(padding, Math.min(y, window.innerHeight - messageHeight - padding));
-            
+
+            const x = Math.random() * (window.innerWidth - messageWidth - 40) + 20;
+            const y = Math.random() * (window.innerHeight - messageHeight - 40) + 20;
+
             messageElement.style.left = x + 'px';
             messageElement.style.top = y + 'px';
-            
-            // إزالة العنصر بعد انتهاء animation (4 ثوان)
+
             setTimeout(() => {
                 if (messageElement.parentNode) {
                     messageElement.parentNode.removeChild(messageElement);
                 }
             }, 4000);
         }
-        
-        // عرض جملة بشكل متتالي
+
         function startFloatingMessages() {
             showFloatingMessage();
-            const interval = 800 + Math.random() * 400; // بين 0.8 و 1.2 ثانية (تظهر ورا بعض)
+            const interval = 800 + Math.random() * 400;
             setTimeout(startFloatingMessages, interval);
         }
-        
-        // بدء عرض الجمل بعد تحميل الصفحة
+
         window.addEventListener('load', () => {
             setTimeout(startFloatingMessages, 1000);
         });
 
-        // زر أو تقهو هنا - تفعيل تأثير التعبئة
+        // زر تقهو - تفعيل تأثير التعبئة
         const coffeeFillBtn = document.getElementById('coffeeFillBtn');
         const coffeeFill = document.querySelector('.coffee-fill');
+        const coffeeTextEffect = document.querySelector('.coffee-text-effect');
         
         if (coffeeFillBtn && coffeeFill) {
             coffeeFillBtn.addEventListener('click', () => {
-                coffeeFill.classList.add('active');
+                // إعادة تعيين التأثير أولاً
+                coffeeFill.classList.remove('active');
+                coffeeFill.style.height = '0%';
+                coffeeFill.style.animation = 'none';
+                
+                if (coffeeTextEffect) {
+                    coffeeTextEffect.style.animation = 'none';
+                    coffeeTextEffect.style.opacity = '0';
+                }
+                
+                // إعطاء وقت بسيط لإعادة التهيئة ثم تفعيل التأثير
+                setTimeout(() => {
+                    coffeeFill.style.animation = '';
+                    coffeeFill.classList.add('active');
+                    if (coffeeTextEffect) {
+                        coffeeTextEffect.style.animation = '';
+                    }
+                }, 100);
+            });
+            
+            // عند انتهاء animation، إعادة تعيين التأثير
+            coffeeFill.addEventListener('animationend', () => {
+                coffeeFill.classList.remove('active');
+                coffeeFill.style.height = '0%';
+                coffeeFill.style.animation = 'none';
+                
+                if (coffeeTextEffect) {
+                    coffeeTextEffect.style.animation = 'none';
+                    coffeeTextEffect.style.opacity = '0';
+                }
             });
         }
-
     </script>
-    <div class="social-section">
-        <div class="social-title">وسائل التواصل:</div>
-        <div class="social-links">
-            <a href="mailto:© 2025 أحمد سُليمان" class="social-link">إيميل</a>
-            <a href="https://www.snapchat.com/@iahmad_soliman" class="social-link" target="_blank">سناب</a>
-            <a href="https://t.me/iAhmadH" class="social-link" target="_blank">تليجرام</a>
-        </div>
-        <div class="email-footer">© 2025 أحمد سُليمان</div>
-    </div>
 </body>
 </html>
