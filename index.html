@@ -305,7 +305,7 @@
             width: 100%;
             height: 0%;
             background: linear-gradient(to top, #3e2723 0%, #5d4037 20%, #6d4c41 50%, #8d6e63 80%, #a1887f 100%);
-            z-index: 1;
+            z-index: 99999;
             pointer-events: none;
             opacity: 0;
             overflow: hidden;
@@ -322,7 +322,7 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 0;
+            z-index: 100000;
             pointer-events: none;
             color: #ffffff;
             font-size: 2em;
@@ -333,7 +333,7 @@
             text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
             padding: 40px 30px;
         }
-
+        
         .coffee-fill.active ~ .coffee-text-effect {
             animation: textRise 15s ease-in forwards;
         }
@@ -359,18 +359,18 @@
 
         @keyframes textRise {
             0% {
-                bottom: 80px;
+                bottom: 0;
                 opacity: 0;
             }
-            5% {
+            3% {
                 opacity: 1;
             }
-            95% {
+            97% {
                 opacity: 1;
             }
             100% {
-                bottom: calc(100vh - 120px);
-                opacity: 0;
+                bottom: calc(100vh - 100px);
+                opacity: 1;
             }
         }
 
@@ -433,10 +433,16 @@
         }
 
         /* Coffee Fill Button */
-        .coffee-fill-btn {
+        .coffee-buttons-container {
             position: fixed;
             bottom: 30px;
             right: 30px;
+            display: flex;
+            gap: 10px;
+            z-index: 100001;
+        }
+
+        .coffee-fill-btn {
             background: linear-gradient(135deg, #8d6e63 0%, #6d4c41 100%);
             color: white;
             border: none;
@@ -448,7 +454,6 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(109, 76, 65, 0.3);
-            z-index: 1000;
         }
 
         .coffee-fill-btn:hover {
@@ -493,9 +498,13 @@
             }
 
 
-            .coffee-fill-btn {
+            .coffee-buttons-container {
                 bottom: 20px;
                 right: 20px;
+                gap: 8px;
+            }
+
+            .coffee-fill-btn {
                 padding: 10px 20px;
                 font-size: 0.85em;
             }
@@ -510,8 +519,8 @@
             }
 
             .image-section-title {
-                font-size: 1.3em;
-                margin-bottom: 20px;
+                font-size: 1.2em;
+                margin-bottom: 25px;
             }
 
             .image-frame {
@@ -574,7 +583,7 @@
 
     <!-- Image Section -->
     <section class="image-section">
-        <h2 class="image-section-title">تطبيقات سويتها بمخمخه:</h2>
+        <h2 class="image-section-title">مشاريع مخمخت عليها:</h2>
         <a href="https://coffee.iahmadh.com" target="_blank" class="image-frame">
             <video autoplay muted loop playsinline>
                 <source src="gallery-video.mp4" type="video/mp4">
@@ -583,7 +592,8 @@
             <div class="video-overlay"></div>
             <div class="video-title">
                 <h3>حاسبة القهوة المقطرة</h3>
-                <p>ادخل وحضّر قهوتك بأبسط طريقة</p>
+                <p>صفحة مُــمتعة، تســاعدك تحضّر قهوتك <br>
+                    بدون تعقيدات حسابيـة وحوسة أرقـام</p>
             </div>
         </a>
     </section>
@@ -594,7 +604,10 @@
     </footer>
 
     <!-- Coffee Fill Button -->
-    <button class="coffee-fill-btn" id="coffeeFillBtn">تقهو</button>
+    <div class="coffee-buttons-container">
+        <button class="coffee-fill-btn" id="coffeeFillBtn">تقهو</button>
+        <button class="coffee-fill-btn" id="resetBtn" style="display: none;">بس، عشت</button>
+    </div>
 
     <script>
         // الجمل الديناميكية
@@ -654,11 +667,50 @@
 
         // زر تقهو - تفعيل تأثير التعبئة
         const coffeeFillBtn = document.getElementById('coffeeFillBtn');
+        const resetBtn = document.getElementById('resetBtn');
         const coffeeFill = document.querySelector('.coffee-fill');
         const coffeeTextEffect = document.querySelector('.coffee-text-effect');
         
-        if (coffeeFillBtn && coffeeFill) {
+        if (coffeeFillBtn && coffeeFill && resetBtn) {
+            let isEffectComplete = false; // لتتبع حالة اكتمال التأثير
+            
+            // زر تقهو/سلمت/كوب ثاني
             coffeeFillBtn.addEventListener('click', () => {
+                if (coffeeFillBtn.textContent === 'تقهو') {
+                    // الحالة الأولى: بدء التأثير
+                    isEffectComplete = false;
+                    startCoffeeEffect();
+                    coffeeFillBtn.textContent = 'سلمت';
+                    resetBtn.style.display = 'none'; // لا نظهر زر بس، عشت بعد
+                } else if (coffeeFillBtn.textContent === 'سلمت') {
+                    // الحالة الثانية: إيقاف التأثير
+                    if (isEffectComplete) {
+                        // إذا اكتمل التأثير، أعيده للبداية
+                        resetEffectToStart();
+                    } else {
+                        // إذا ما زال يعمل، أوقفه في مكانه
+                        pauseCoffeeEffect();
+                    }
+                    coffeeFillBtn.textContent = 'كوب ثاني';
+                    resetBtn.style.display = 'block'; // إظهار زر بس، عشت
+                } else if (coffeeFillBtn.textContent === 'كوب ثاني') {
+                    // الحالة الثالثة: إعادة بدء التأثير من البداية
+                    isEffectComplete = false;
+                    startCoffeeEffect();
+                    coffeeFillBtn.textContent = 'سلمت';
+                    resetBtn.style.display = 'none'; // إخفاء زر بس، عشت
+                }
+            });
+            
+            // زر بس، عشت - يعيد كل شيء للبداية
+            resetBtn.addEventListener('click', () => {
+                isEffectComplete = false;
+                resetCoffeeEffect();
+                coffeeFillBtn.textContent = 'تقهو';
+                resetBtn.style.display = 'none'; // إخفاء زر بس، عشت
+            });
+            
+            function startCoffeeEffect() {
                 // إعادة تعيين التأثير أولاً
                 coffeeFill.classList.remove('active');
                 coffeeFill.style.height = '0%';
@@ -667,6 +719,7 @@
                 if (coffeeTextEffect) {
                     coffeeTextEffect.style.animation = 'none';
                     coffeeTextEffect.style.opacity = '0';
+                    coffeeTextEffect.textContent = 'جالس أعبي الصفحة قهوة'; // إعادة النص الأصلي
                 }
                 
                 // إعطاء وقت بسيط لإعادة التهيئة ثم تفعيل التأثير
@@ -677,10 +730,19 @@
                         coffeeTextEffect.style.animation = '';
                     }
                 }, 100);
-            });
+            }
             
-            // عند انتهاء animation، إعادة تعيين التأثير
-            coffeeFill.addEventListener('animationend', () => {
+            function pauseCoffeeEffect() {
+                // إيقاف التأثير في مكانه فقط (pause)
+                coffeeFill.style.animationPlayState = 'paused';
+                if (coffeeTextEffect) {
+                    coffeeTextEffect.style.animationPlayState = 'paused';
+                    coffeeTextEffect.textContent = 'سمّ'; // تغيير النص عند إيقاف التأثير
+                }
+            }
+            
+            function resetEffectToStart() {
+                // إعادة تعيين التأثير للبداية
                 coffeeFill.classList.remove('active');
                 coffeeFill.style.height = '0%';
                 coffeeFill.style.animation = 'none';
@@ -688,8 +750,38 @@
                 if (coffeeTextEffect) {
                     coffeeTextEffect.style.animation = 'none';
                     coffeeTextEffect.style.opacity = '0';
+                    coffeeTextEffect.textContent = 'جالس أعبي الصفحة قهوة'; // إعادة النص الأصلي
                 }
+            }
+            
+            function resetCoffeeEffect() {
+                // إيقاف وإعادة تعيين التأثير
+                coffeeFill.classList.remove('active');
+                coffeeFill.style.animationPlayState = 'running';
+                coffeeFill.style.height = '0%';
+                coffeeFill.style.animation = 'none';
+                
+                if (coffeeTextEffect) {
+                    coffeeTextEffect.style.animation = 'none';
+                    coffeeTextEffect.style.opacity = '0';
+                    coffeeTextEffect.style.animationPlayState = 'running';
+                    coffeeTextEffect.textContent = 'جالس أعبي الصفحة قهوة'; // إعادة النص الأصلي
+                }
+            }
+            
+            // عند انتهاء animation، إبقاء التأثير ثابت عند النهاية
+            coffeeFill.addEventListener('animationend', () => {
+                // لا نقوم بإعادة التعيين، نترك التأثير ثابت عند 100%
+                isEffectComplete = true; // التأثير اكتمل
+                // التأثير سيُعاد تعيينه فقط عند الضغط على "سلمت" أو "بس، عشت"
             });
+            
+            // عند انتهاء animation النص، تغييره إلى "سمّ"
+            if (coffeeTextEffect) {
+                coffeeTextEffect.addEventListener('animationend', () => {
+                    coffeeTextEffect.textContent = 'سمّ';
+                });
+            }
         }
     </script>
 </body>
