@@ -194,14 +194,21 @@
         }
 
         .image-frame {
-            width: 400px;
-            height: 400px;
+            width: 100%;
+            height: 600px;
             margin: 0 auto;
-            border: 3px solid #333;
-            border-radius: 10px;
             overflow: hidden;
-            background: #fff;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .image-frame:hover {
+            transform: scale(1.02);
         }
 
         .image-frame video,
@@ -210,6 +217,39 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .video-title {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+        }
+
+        .video-title h3 {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        .video-title p {
+            font-size: 1.5em;
+            font-weight: 400;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
         }
 
         /* Footer */
@@ -476,8 +516,16 @@
 
             .image-frame {
                 width: 100%;
-                max-width: 350px;
-                height: 350px;
+                height: 400px;
+            }
+
+            .video-title h3 {
+                font-size: 1.5em;
+                margin-bottom: 10px;
+            }
+
+            .video-title p {
+                font-size: 1em;
             }
         }
     </style>
@@ -524,12 +572,17 @@
     <!-- Image Section -->
     <section class="image-section">
         <h2 class="image-section-title">تصفّح:</h2>
-        <div class="image-frame">
+        <a href="https://coffee.iahmadh.com" target="_blank" class="image-frame">
             <video autoplay muted loop playsinline>
                 <source src="gallery-video.mp4" type="video/mp4">
                 <source src="gallery-video.webm" type="video/webm">
             </video>
-        </div>
+            <div class="video-overlay"></div>
+            <div class="video-title">
+                <h3>حاسبة القهوة المقطرة</h3>
+                <p>ادخل وحضّر قهوتك بأبسط طريقة</p>
+            </div>
+        </a>
     </section>
 
     <!-- Footer -->
