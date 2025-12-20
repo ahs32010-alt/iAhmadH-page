@@ -30,12 +30,17 @@
             box-sizing: border-box;
         }
 
+        html {
+            background: transparent;
+        }
+
         body {
             font-family: 'Tajawal', sans-serif;
             margin: 0;
             padding: 0;
             direction: rtl;
             overflow-x: hidden;
+            background: transparent;
         }
 
         /* Header Section - Blue Background */
@@ -173,94 +178,38 @@
             transform: scale(1.1);
         }
 
-        /* Content Section - White Background with Cards */
-        .content-section {
-            background: #f8f9fa;
+
+        /* Image Section */
+        .image-section {
             padding: 60px 20px;
-            min-height: 100vh;
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            text-align: center;
+            background: transparent;
         }
 
-        /* ============================================
-           إعدادات فيديو الخلفية - Background Video Settings
-           ============================================
-           لتعديل وضوح الفيديو: غيّر قيمة opacity (من 0.1 إلى 1.0)
-           لتعديل تأثير الضبابية: غيّر قيمة blur (من 0px إلى 20px)
-           ============================================ */
-        .background-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
+        .image-section-title {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .image-frame {
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            border: 3px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-frame video,
+        .image-frame img {
             width: 100%;
             height: 100%;
-            transform: translate(-50%, -50%);
-            z-index: 0;
-            filter: blur(5px); /* تأثير الضبابية - غيّر من 0px إلى 20px */
-            opacity: 1; /* وضوح الفيديو - غيّر من 0.1 (خافت) إلى 1.0 (واضح جداً) */
-            object-fit: contain; /* يظهر الفيديو كاملاً بدون تكبير أو قص */
-        }
-
-        .cards-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .content-card {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 12px 25px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            text-decoration: none;
-            color: #2c3e50;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 10px;
-            justify-content: center;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-            z-index: 1;
-        }
-
-        .content-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .content-card.purple {
-            background: linear-gradient(135deg, #b4a7d6 0%, #9b8cc2 100%);
-        }
-
-        .card-icon {
-            font-size: 1.5em;
-            margin-bottom: 0;
-        }
-
-        .card-label {
-            font-size: 0.9em;
-            opacity: 0.8;
-            margin-bottom: 10px;
-            font-weight: 500;
-        }
-
-        .card-title {
-            font-size: 1.3em;
-            font-weight: 700;
+            object-fit: cover;
+            display: block;
         }
 
         /* Footer */
@@ -471,7 +420,7 @@
         @media (max-width: 768px) {
             .header-section {
                 padding: 20px 15px 30px;
-                min-height: 100vh;
+                min-height: 60vh;
                 height: auto;
             }
 
@@ -503,29 +452,6 @@
                 padding: 0 10px;
             }
 
-            .content-section {
-                padding: 20px 15px;
-                height: 100vh;
-                min-height: 100vh;
-            }
-
-            .cards-container {
-                padding: 10px;
-            }
-
-            .content-card {
-                padding: 12px 20px;
-                flex-direction: row;
-                gap: 8px;
-            }
-
-            .card-icon {
-                font-size: 1.3em;
-            }
-
-            .card-title {
-                font-size: 1.1em;
-            }
 
             .coffee-fill-btn {
                 bottom: 20px;
@@ -537,6 +463,21 @@
             .floating-message {
                 font-size: 0.75em;
                 padding: 6px 12px;
+            }
+
+            .image-section {
+                padding: 40px 15px;
+            }
+
+            .image-section-title {
+                font-size: 1.3em;
+                margin-bottom: 20px;
+            }
+
+            .image-frame {
+                width: 100%;
+                max-width: 350px;
+                height: 350px;
             }
         }
     </style>
@@ -580,17 +521,14 @@
         </div>
     </section>
 
-    <!-- Content Section -->
-    <section class="content-section">
-        <video class="background-video" autoplay muted loop playsinline>
-            <source src="background-video.mp4" type="video/mp4">
-            <source src="background-video.webm" type="video/webm">
-        </video>
-        <div class="cards-container">
-            <a href="https://coffee.iahmadh.com" target="_blank" class="content-card">
-                <div class="card-icon">☕</div>
-                <div class="card-title">حاسبة القهوة</div>
-            </a>
+    <!-- Image Section -->
+    <section class="image-section">
+        <h2 class="image-section-title">تصفّح:</h2>
+        <div class="image-frame">
+            <video autoplay muted loop playsinline>
+                <source src="gallery-video.mp4" type="video/mp4">
+                <source src="gallery-video.webm" type="video/webm">
+            </video>
         </div>
     </section>
 
