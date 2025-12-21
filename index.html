@@ -314,7 +314,7 @@
 
         .coffee-fill.active {
             opacity: 0.85;
-            animation: pourLiquid 15s ease-in forwards;
+            animation: pourLiquid 10s ease-in forwards;
         }
 
         .coffee-text-effect {
@@ -325,7 +325,7 @@
             z-index: 100000;
             pointer-events: none;
             color: #ffffff;
-            font-size: 2em;
+            font-size: 1.6em;
             font-weight: 700;
             text-align: center;
             white-space: nowrap;
@@ -335,7 +335,7 @@
         }
         
         .coffee-fill.active ~ .coffee-text-effect {
-            animation: textRise 15s ease-in forwards;
+            animation: textRise 10s ease-in forwards;
         }
 
         @keyframes pourLiquid {
@@ -542,7 +542,7 @@
 <body>
     <!-- Coffee Fill Effect -->
     <div class="coffee-fill"></div>
-    <div class="coffee-text-effect">جالس أعبي الصفحة قهوة</div>
+    <div class="coffee-text-effect">أعبي لك الصفحة قهوة</div>
 
     <!-- Header Section -->
     <section class="header-section">
@@ -719,7 +719,7 @@
                 if (coffeeTextEffect) {
                     coffeeTextEffect.style.animation = 'none';
                     coffeeTextEffect.style.opacity = '0';
-                    coffeeTextEffect.textContent = 'جالس أعبي الصفحة قهوة'; // إعادة النص الأصلي
+                    coffeeTextEffect.textContent = 'أعبي لك الصفحة قهوة'; // إعادة النص الأصلي
                 }
                 
                 // إعطاء وقت بسيط لإعادة التهيئة ثم تفعيل التأثير
@@ -750,7 +750,7 @@
                 if (coffeeTextEffect) {
                     coffeeTextEffect.style.animation = 'none';
                     coffeeTextEffect.style.opacity = '0';
-                    coffeeTextEffect.textContent = 'جالس أعبي الصفحة قهوة'; // إعادة النص الأصلي
+                    coffeeTextEffect.textContent = 'أعبي لك الصفحة قهوة'; // إعادة النص الأصلي
                 }
             }
             
@@ -765,7 +765,7 @@
                     coffeeTextEffect.style.animation = 'none';
                     coffeeTextEffect.style.opacity = '0';
                     coffeeTextEffect.style.animationPlayState = 'running';
-                    coffeeTextEffect.textContent = 'جالس أعبي الصفحة قهوة'; // إعادة النص الأصلي
+                    coffeeTextEffect.textContent = 'أعبي لك الصفحة قهوة'; // إعادة النص الأصلي
                 }
             }
             
