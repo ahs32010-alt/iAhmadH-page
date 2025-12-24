@@ -606,7 +606,7 @@
     <!-- Coffee Fill Button -->
     <div class="coffee-buttons-container">
         <button class="coffee-fill-btn" id="coffeeFillBtn">تقهو</button>
-        <button class="coffee-fill-btn" id="resetBtn" style="display: none;">بس، عشت</button>
+        <button class="coffee-fill-btn" id="resetBtn" style="display: none;">أكرم</button>
     </div>
 
     <script>
@@ -681,7 +681,7 @@
                     isEffectComplete = false;
                     startCoffeeEffect();
                     coffeeFillBtn.textContent = 'سلمت';
-                    resetBtn.style.display = 'none'; // لا نظهر زر بس، عشت بعد
+                    resetBtn.style.display = 'none'; // لا نظهر زر أكرم بعد
                 } else if (coffeeFillBtn.textContent === 'سلمت') {
                     // الحالة الثانية: إيقاف التأثير
                     if (isEffectComplete) {
@@ -692,22 +692,22 @@
                         pauseCoffeeEffect();
                     }
                     coffeeFillBtn.textContent = 'كوب ثاني';
-                    resetBtn.style.display = 'block'; // إظهار زر بس، عشت
+                    resetBtn.style.display = 'block'; // إظهار زر أكرم
                 } else if (coffeeFillBtn.textContent === 'كوب ثاني') {
                     // الحالة الثالثة: إعادة بدء التأثير من البداية
                     isEffectComplete = false;
                     startCoffeeEffect();
                     coffeeFillBtn.textContent = 'سلمت';
-                    resetBtn.style.display = 'none'; // إخفاء زر بس، عشت
+                    resetBtn.style.display = 'none'; // إخفاء زر أكرم
                 }
             });
             
-            // زر بس، عشت - يعيد كل شيء للبداية
+            // زر أكرم - يعيد كل شيء للبداية
             resetBtn.addEventListener('click', () => {
                 isEffectComplete = false;
                 resetCoffeeEffect();
                 coffeeFillBtn.textContent = 'تقهو';
-                resetBtn.style.display = 'none'; // إخفاء زر بس، عشت
+                resetBtn.style.display = 'none'; // إخفاء زر أكرم
             });
             
             function startCoffeeEffect() {
@@ -773,7 +773,7 @@
             coffeeFill.addEventListener('animationend', () => {
                 // لا نقوم بإعادة التعيين، نترك التأثير ثابت عند 100%
                 isEffectComplete = true; // التأثير اكتمل
-                // التأثير سيُعاد تعيينه فقط عند الضغط على "سلمت" أو "بس، عشت"
+                // التأثير سيُعاد تعيينه فقط عند الضغط على "سلمت" أو "أكرم"
             });
             
             // عند انتهاء animation النص، تغييره إلى "سمّ"
