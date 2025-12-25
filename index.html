@@ -75,6 +75,8 @@
         .header-section > * {
             position: relative;
             z-index: 1;
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
         }
 
         .lang-toggle {
@@ -461,6 +463,124 @@
             box-shadow: 0 6px 20px rgba(109, 76, 65, 0.4);
         }
 
+        /* Fade-in Animation on Page Load */
+        .header-section > * {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .profile-image-wrapper {
+            animation-delay: 0.1s;
+        }
+
+        .header-name {
+            animation-delay: 0.2s;
+        }
+
+        .header-bio {
+            animation-delay: 0.3s;
+        }
+
+        .location {
+            animation-delay: 0.4s;
+        }
+
+        .social-icons {
+            animation-delay: 0.5s;
+        }
+
+        .image-section {
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.6s;
+            opacity: 0;
+        }
+
+        .footer {
+            animation: fadeIn 0.8s ease-out forwards;
+            animation-delay: 0.7s;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Loading Screen with Snow Background */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999999;
+            overflow: hidden;
+            animation: fadeOut 0.5s ease-out 1.5s forwards;
+        }
+
+        .loading-screen.hidden {
+            display: none;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        /* Logo with Rotation Effect */
+        .loading-logo {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-logo-img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            filter: brightness(0) invert(1);
+            animation: rotate 2s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            90% {
+                transform: rotate(430deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .header-section {
@@ -536,10 +656,22 @@
             .video-title p {
                 font-size: 1em;
             }
+
+            .loading-logo-img {
+                width: 120px;
+                height: 120px;
+            }
         }
     </style>
 </head>
 <body>
+        <!-- Loading Screen with Snow -->
+        <div class="loading-screen" id="loadingScreen">
+            <div class="loading-logo">
+                <img src="profile.jpg" alt="Ahmad Soliman" class="loading-logo-img">
+            </div>
+        </div>
+
     <!-- Coffee Fill Effect -->
     <div class="coffee-fill"></div>
     <div class="coffee-text-effect">أعبي لك الصفحة قهوة</div>
@@ -610,6 +742,18 @@
     </div>
 
     <script>
+        // Loading Screen
+        (function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            
+            // Hide loading screen after 1.5 seconds
+            setTimeout(() => {
+                if (loadingScreen) {
+                    loadingScreen.classList.add('hidden');
+                }
+            }, 1500);
+        })();
+
         // الجمل الديناميكية
         const messages = [
             'قلت أذكارك؟',
